@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-dark: #081F3D;
+  --primary-navy: #0E2F5A;
+  --accent-blue: #2E79B7;
+  --accent-electric: #4EA3E0;
+  --white: #FFFFFF;
+  --text-muted: #F5F7FA;
+  --card-bg: #0E2F5A;
+  --border-color: #2E79B7;
+}
+
+body {
+  color: var(--white);
+  background-color: var(--primary-dark);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  .marquee-content {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+  }
+
+  .marquee-content:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .border-structural {
+    @apply border border-border-color;
+  }
+}
+
+/* Custom animated background for Hero - Minimalist */
+.bg-grid-pattern {
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, rgba(46, 121, 183, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(46, 121, 183, 0.1) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+/* Hide scrollbar for testimonials carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Perspective container for 3D elements */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Hide scrollbar for testimonials carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
