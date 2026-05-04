@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     canonical: "https://www.parvinfosoft.com",
   },
   icons: {
-    icon: '/icon.png?v=2',
+    icon: '/parv-logo-icon.png',
   },
   openGraph: {
     title: "ParvInfoSoft | AI Training & IT Services in Surat",
