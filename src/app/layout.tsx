@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "ParvInfoSoft | AI Training & IT Services in Surat",
-    description: "Learn AI, automation, web development and business growth. Premium AI training institute and IT solutions company in Surat.",
+    description: "ParvInfoSoft is a leading AI Institute in Surat, Gujarat, delivering hands-on AI training, AI tools mastery, and automation skills that help students and professionals build real income opportunities. We also provide expert web development, app development, and digital marketing services, enabling businesses to scale with AI automation, CRM solutions, and custom software. Serving clients across India and worldwide.",
     url: "https://www.parvinfosoft.com",
     siteName: "ParvInfoSoft",
     images: [
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ParvInfoSoft | AI Training & IT Services",
-    description: "Premium AI training institute and IT solutions company in Surat, Gujarat.",
+    description: "ParvInfoSoft is a leading AI Institute in Surat, Gujarat, delivering hands-on AI training, AI tools mastery, and automation skills that help students and professionals build real income opportunities. We also provide expert web development, app development, and digital marketing services, enabling businesses to scale with AI automation, CRM solutions, and custom software. Serving clients across India and worldwide.",
     images: ["/logo.png"],
   },
   robots: {
