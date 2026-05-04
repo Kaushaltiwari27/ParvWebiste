@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "ParvInfoSoft | AI Training Institute & IT Services Company in Surat, India",
-  description: "Learn AI, automation, web development and business growth with ParvInfoSoft. Premium AI training institute and IT solutions company serving Surat, Gujarat, and all of India.",
+  description: "ParvInfoSoft is a leading AI Institute in Surat, Gujarat, delivering hands-on AI training, AI tools mastery, and automation skills that help students and professionals build real income opportunities. We also provide expert web development, app development, and digital marketing services, enabling businesses to scale with AI automation, CRM solutions, and custom software. Serving clients across India and worldwide.",
   keywords: [
     "AI course online","Artificial Intelligence training","Learn AI from scratch","AI certification course",
     "Machine learning course online","Data science course online","Deep learning course","Generative AI course",
