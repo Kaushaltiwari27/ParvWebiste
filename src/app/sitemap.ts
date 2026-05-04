@@ -1,13 +1,19 @@
 import { MetadataRoute } from 'next';
-import { getAllPages } from '@/data/pages';
+import { servicesData, trainingData, solutionsData, resourcesData } from '@/data/pages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.parvinfosoft.com';
   
-  // Get all dynamic pages from the data source
-  const pagesData = getAllPages();
-  const dynamicRoutes = Object.keys(pagesData).map((slug) => ({
-    url: `${baseUrl}/${pagesData[slug].category}/${slug}`,
+  // Create mapping of slug to category
+  const allPages: Record<string, string> = {
+    ...Object.keys(servicesData).reduce((acc, key) => ({ ...acc, [key]: 'services' }), {}),
+    ...Object.keys(trainingData).reduce((acc, key) => ({ ...acc, [key]: 'training' }), {}),
+    ...Object.keys(solutionsData).reduce((acc, key) => ({ ...acc, [key]: 'solutions' }), {}),
+    ...Object.keys(resourcesData).reduce((acc, key) => ({ ...acc, [key]: 'resources' }), {}),
+  };
+
+  const dynamicRoutes = Object.keys(allPages).map((slug) => ({
+    url: `${baseUrl}/${allPages[slug]}/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
