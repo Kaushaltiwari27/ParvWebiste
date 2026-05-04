@@ -45,7 +45,7 @@ export default function WhyProgram() {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="md:w-1/3"
           >
             <h2 className="font-inter text-4xl md:text-5xl font-black mb-6 text-white uppercase tracking-tight">
@@ -65,7 +65,7 @@ export default function WhyProgram() {
                   key={reason.id}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{ delay: index * 0.1 }}
                   className="border-b border-border-color last:border-b-0"
                 >
@@ -121,7 +121,7 @@ export default function WhyProgram() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="bg-primary-navy border border-border-color p-8 grid grid-cols-2 md:grid-cols-5 gap-6 text-center relative overflow-hidden"
         >
           {/* vertical dividers */}

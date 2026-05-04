@@ -37,7 +37,7 @@ export default function Pricing() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mb-20 text-center"
         >
           <h2 className="text-[40px] md:text-[56px] font-medium text-white leading-[1.1] mb-6">
@@ -52,7 +52,7 @@ export default function Pricing() {
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: i * 0.1 }}
               className={`relative bg-[#050505] rounded-3xl p-8 flex flex-col h-full border ${
                 plan.featured ? "border-accent-electric shadow-[0_0_30px_rgba(78,163,224,0.15)] md:-mt-8 md:mb-8" : "border-white/10"

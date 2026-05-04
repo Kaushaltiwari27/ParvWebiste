@@ -23,7 +23,7 @@ export default function ModulesTimeline() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mb-20 text-center"
         >
           <h2 className="text-[40px] md:text-[56px] font-medium text-white leading-[1.1] mb-6">
@@ -39,7 +39,7 @@ export default function ModulesTimeline() {
           <motion.div 
             initial={{ height: 0 }}
             whileInView={{ height: "100%" }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 3, ease: "easeInOut" }}
             className="absolute left-[28px] md:left-1/2 top-0 w-[2px] bg-accent-electric -translate-x-1/2 rounded-full shadow-[0_0_15px_rgba(78,163,224,0.8)] z-0"
           ></motion.div>
@@ -53,7 +53,7 @@ export default function ModulesTimeline() {
                   key={index}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: false, margin: "-100px" }}
                   transition={{ duration: 0.6 }}
                   className={`relative flex items-center ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'} pl-16 md:pl-0`}
                 >

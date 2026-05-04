@@ -118,7 +118,7 @@ export default function DynamicPageTemplate({ data, category }: { data: PageCont
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.6 }}
               className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden"
             >
@@ -140,7 +140,7 @@ export default function DynamicPageTemplate({ data, category }: { data: PageCont
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
               <h3 className="text-3xl font-medium text-white mb-10">How We Build It</h3>
@@ -165,7 +165,7 @@ export default function DynamicPageTemplate({ data, category }: { data: PageCont
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
               <h3 className="text-3xl font-medium text-white mb-10">Curriculum Breakdown</h3>
@@ -185,7 +185,7 @@ export default function DynamicPageTemplate({ data, category }: { data: PageCont
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
               <h3 className="text-3xl font-medium text-white mb-10">Real Results</h3>
@@ -214,7 +214,7 @@ export default function DynamicPageTemplate({ data, category }: { data: PageCont
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
               <h3 className="text-3xl font-medium text-white mb-10">Frequently Asked Questions</h3>
@@ -250,7 +250,7 @@ export default function DynamicPageTemplate({ data, category }: { data: PageCont
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.6 }}
               className="mt-16 p-8 md:p-12 border border-white/10 rounded-3xl bg-white/5 flex flex-col md:flex-row items-center justify-between gap-8"
             >

@@ -146,7 +146,7 @@ export default function CaseStudiesPage() {
                 key={study.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: false, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group relative bg-[#050505] rounded-3xl border border-white/10 overflow-hidden hover:border-accent-electric/30 transition-colors p-8 md:p-10"
               >

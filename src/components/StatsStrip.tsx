@@ -16,7 +16,7 @@ export default function StatsStrip() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="text-center mb-16"
         >
           <h2 className="text-white/60 text-lg uppercase tracking-widest font-medium">
@@ -30,7 +30,7 @@ export default function StatsStrip() {
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -10 }}
               className="relative bg-[#0A0A0A] border border-white/5 p-8 rounded-2xl flex flex-col items-center justify-center group overflow-hidden"

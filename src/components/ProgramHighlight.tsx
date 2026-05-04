@@ -24,7 +24,7 @@ export default function ProgramHighlight() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className="flex flex-col items-start"
             >
               {/* Badge */}
@@ -56,7 +56,7 @@ export default function ProgramHighlight() {
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ delay: i * 0.1 }}
                     className="flex items-center gap-3"
                   >
@@ -84,7 +84,7 @@ export default function ProgramHighlight() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotateY: 20 }}
               whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 1, type: "spring", stiffness: 40 }}
               className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(78,163,224,0.15)] transform-gpu perspective-1000"
             >

@@ -109,7 +109,7 @@ export default function SuccessStories() {
                 key={t.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "100px" }}
+                viewport={{ once: false, margin: "100px" }}
                 transition={{ delay: (index % 5) * 0.1 }}
                 className="w-[350px] md:w-[420px] shrink-0 bg-[#050505] border border-white/10 rounded-3xl p-8 relative group hover:border-white/30 transition-colors"
               >

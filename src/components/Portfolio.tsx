@@ -125,7 +125,7 @@ export default function Portfolio() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.6 }}
             className="max-w-2xl"
           >
@@ -143,7 +143,7 @@ export default function Portfolio() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.6 }}
             className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 md:pb-0"
           >

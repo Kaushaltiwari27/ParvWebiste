@@ -19,7 +19,7 @@ export default function WhyChooseUs() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mb-20 text-center"
         >
           <h2 className="text-[40px] md:text-[56px] font-medium text-white leading-[1.1]">
@@ -34,7 +34,7 @@ export default function WhyChooseUs() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="absolute top-1/2 left-0 right-0 h-[1px] bg-accent-electric -translate-y-1/2 origin-left hidden md:block z-0 shadow-[0_0_10px_rgba(78,163,224,0.5)]"
           ></motion.div>
 
@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 className="bg-[#050505] border border-white/10 rounded-xl p-6 text-center flex items-center justify-center min-h-[140px] hover:bg-white/5 transition-colors shadow-2xl relative"
               >

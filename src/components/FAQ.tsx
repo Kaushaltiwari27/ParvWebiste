@@ -41,7 +41,7 @@ export default function FAQ() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mb-20 text-center"
         >
           <h2 className="text-[40px] md:text-[56px] font-medium text-white leading-[1.1] mb-6">
@@ -55,7 +55,7 @@ export default function FAQ() {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: i * 0.1 }}
               className="border border-white/10 bg-[#050505] rounded-xl overflow-hidden transition-colors hover:border-white/20"
             >

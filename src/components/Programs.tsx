@@ -52,7 +52,7 @@ export default function Programs() {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="font-inter text-4xl md:text-5xl font-black mb-6 text-white uppercase tracking-tight"
           >
             Engineering Your <br /> Future.
@@ -71,7 +71,7 @@ export default function Programs() {
                 key={i}
                 initial={{ opacity: 0, y: 30, rotateX: 0 }}
                 whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ delay: i * 0.1 }}
                 className={`relative flex flex-col p-8 border border-border-color overflow-hidden group ${
                   prog.popular ? "bg-primary-navy" : "bg-primary-dark"
@@ -133,7 +133,7 @@ export default function Programs() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="bg-primary-dark border border-border-color overflow-hidden hidden md:block"
         >
           <div className="p-8 border-b border-border-color text-center bg-primary-navy">

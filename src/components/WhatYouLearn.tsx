@@ -35,7 +35,7 @@ export default function WhatYouLearn() {
         <motion.h2 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="font-sora text-4xl md:text-5xl font-bold mb-16 text-white"
         >
           What You'll Learn
@@ -49,7 +49,7 @@ export default function WhatYouLearn() {
                 key={item.id}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ delay: index * 0.05 }}
                 className="border-t border-border-color border-b -mt-px first:mt-0"
               >
@@ -95,7 +95,7 @@ export default function WhatYouLearn() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
         >
           <h3 className="font-sora text-3xl font-bold text-white mb-8 text-center">
             Automation Templates You Get

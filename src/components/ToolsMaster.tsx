@@ -29,7 +29,7 @@ export default function ToolsMaster() {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="font-sora text-4xl md:text-5xl font-bold mb-6 text-white"
           >
             Tools You'll Master
@@ -37,7 +37,7 @@ export default function ToolsMaster() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: 0.1 }}
             className="text-xl text-text-muted max-w-2xl mx-auto"
           >
@@ -51,7 +51,7 @@ export default function ToolsMaster() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: index * 0.05 }}
               className="bg-card-bg border border-border-color rounded-2xl p-6 flex flex-col hover:border-accent-electric transition-colors group"
             >
@@ -67,7 +67,7 @@ export default function ToolsMaster() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: tools.length * 0.05 }}
             className="bg-primary-navy border border-border-color border-dashed rounded-2xl p-6 flex flex-col items-center justify-center text-center sm:col-span-2 lg:col-span-1"
           >

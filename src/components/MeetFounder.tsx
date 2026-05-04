@@ -14,7 +14,7 @@ export default function MeetFounder() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="relative w-full aspect-[3/4] max-w-[500px] mx-auto rounded-2xl overflow-hidden border border-white/10"
             >
@@ -38,7 +38,7 @@ export default function MeetFounder() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               <h3 className="text-accent-electric text-sm tracking-widest uppercase font-medium mb-4">Meet Our Founder</h3>
               <h2 className="text-[40px] md:text-[56px] font-medium text-white leading-[1.1] mb-6">
@@ -65,7 +65,7 @@ export default function MeetFounder() {
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ delay: i * 0.1 }}
                     className="border border-white/10 bg-[#050505] rounded-lg p-4 text-center hover:border-accent-electric/50 transition-colors"
                   >

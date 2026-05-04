@@ -37,7 +37,7 @@ export default function CTABanner() {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-[48px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-tight"

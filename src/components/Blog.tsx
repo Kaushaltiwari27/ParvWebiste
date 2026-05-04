@@ -36,7 +36,7 @@ export default function Blog() {
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className="font-inter text-4xl md:text-5xl font-black mb-6 text-white uppercase tracking-tight"
             >
               Latest <br/> Insights.
@@ -44,7 +44,7 @@ export default function Blog() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: 0.1 }}
               className="text-xl text-text-muted"
             >
@@ -54,7 +54,7 @@ export default function Blog() {
           <motion.a 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             href="#" 
             className="hidden md:inline-flex items-center gap-2 border border-border-color hover:border-white text-white font-bold py-3 px-6 transition-colors mt-6 md:mt-0 uppercase tracking-widest text-sm"
           >
@@ -68,7 +68,7 @@ export default function Blog() {
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: i * 0.1 }}
               className="bg-primary-dark overflow-hidden group cursor-pointer border border-border-color hover:border-white transition-all"
             >

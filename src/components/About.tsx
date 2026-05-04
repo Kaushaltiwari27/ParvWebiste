@@ -23,7 +23,7 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
             >
               <h2 className="text-[40px] md:text-[56px] font-medium text-white leading-[1.1] mb-8"
                   style={{
@@ -47,7 +47,7 @@ export default function About() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
                 className="absolute inset-0 z-0 pointer-events-none"
               >
@@ -64,7 +64,7 @@ export default function About() {
                   key={i}
                   initial={{ opacity: 0, x: 50, y: i % 2 === 0 ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  viewport={{ once: false, margin: "-50px" }}
                   transition={{ 
                     duration: 0.8, 
                     delay: i * 0.1, 
