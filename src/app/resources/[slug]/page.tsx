@@ -15,9 +15,13 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 }
 
 export function generateStaticParams() {
-  return Object.keys(resourcesData).map((slug) => ({
-    slug,
-  }));
+  // Filter out keys that have dedicated page.tsx folders to prevent build collisions
+  const dedicatedPages = ["blog", "tools", "case-studies"];
+  return Object.keys(resourcesData)
+    .filter((slug) => !dedicatedPages.includes(slug))
+    .map((slug) => ({
+      slug,
+    }));
 }
 
 export default function ResourcesPage({ params }: { params: { slug: string } }) {
