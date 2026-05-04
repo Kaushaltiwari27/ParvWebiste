@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/contact-us.html',
-        destination: '/get-started',
+        destination: '/',
         permanent: true,
       },
       {
