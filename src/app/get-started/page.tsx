@@ -15,14 +15,37 @@ export default function GetStartedPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Attach the flow type (training or services)
+    data.formType = flow;
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        console.error('Submission failed');
+        alert('Failed to submit form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 1500);
+    }
   };
 
   return (
@@ -111,44 +134,44 @@ export default function GetStartedPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Full Name</label>
-                    <input required type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="John Doe" />
+                    <input required name="name" type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="John Doe" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Phone Number</label>
-                    <input required type="tel" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="+91 98765 43210" />
+                    <input required name="phone" type="tel" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="+91 98765 43210" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Email Address</label>
-                    <input required type="email" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="john@example.com" />
+                    <input required name="email" type="email" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="john@example.com" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">City</label>
-                    <input required type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="Mumbai" />
+                    <input required name="city" type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="Mumbai" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Current Profession</label>
-                    <input required type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="Student / Developer / Marketer" />
+                    <input required name="profession" type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="Student / Developer / Marketer" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Interested Program</label>
-                    <select required className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors appearance-none">
+                    <select required name="program" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors appearance-none">
                       <option value="">Select a program</option>
-                      <option value="foundation">AI Foundation Program</option>
-                      <option value="skill">AI Skill Builder</option>
-                      <option value="income">AI Income Accelerator</option>
+                      <option value="AI Foundation Program">AI Foundation Program</option>
+                      <option value="AI Skill Builder">AI Skill Builder</option>
+                      <option value="AI Income Accelerator">AI Income Accelerator</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm text-white/70">Message / Goal</label>
-                  <textarea rows={4} className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors resize-none" placeholder="What do you want to achieve?"></textarea>
+                  <textarea name="message" rows={4} className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors resize-none" placeholder="What do you want to achieve?"></textarea>
                 </div>
 
                 <button 
@@ -181,51 +204,51 @@ export default function GetStartedPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Full Name</label>
-                    <input required type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="John Doe" />
+                    <input required name="name" type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="John Doe" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Company Name</label>
-                    <input required type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="Acme Corp" />
+                    <input required name="company" type="text" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="Acme Corp" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Email Address</label>
-                    <input required type="email" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="john@example.com" />
+                    <input required name="email" type="email" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="john@example.com" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Phone Number</label>
-                    <input required type="tel" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="+91 98765 43210" />
+                    <input required name="phone" type="tel" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors" placeholder="+91 98765 43210" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Service Needed</label>
-                    <select required className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors appearance-none">
+                    <select required name="service" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors appearance-none">
                       <option value="">Select a service</option>
-                      <option value="ai">AI Automation</option>
-                      <option value="web">Web Development</option>
-                      <option value="app">App Development</option>
-                      <option value="crm">CRM / ERP Systems</option>
-                      <option value="other">Other</option>
+                      <option value="AI Automation">AI Automation</option>
+                      <option value="Web Development">Web Development</option>
+                      <option value="App Development">App Development</option>
+                      <option value="CRM / ERP Systems">CRM / ERP Systems</option>
+                      <option value="Other">Other</option>
                     </select>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm text-white/70">Monthly Budget</label>
-                    <select required className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors appearance-none">
+                    <select required name="budget" className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors appearance-none">
                       <option value="">Select a budget range</option>
-                      <option value="low">Under ₹50k</option>
-                      <option value="mid">₹50k - ₹2L</option>
-                      <option value="high">₹2L+</option>
+                      <option value="Under ₹50k">Under ₹50k</option>
+                      <option value="₹50k - ₹2L">₹50k - ₹2L</option>
+                      <option value="₹2L+">₹2L+</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm text-white/70">Project Requirements</label>
-                  <textarea rows={4} className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors resize-none" placeholder="Describe what you want to build..."></textarea>
+                  <textarea name="requirements" rows={4} className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent-electric transition-colors resize-none" placeholder="Describe what you want to build..."></textarea>
                 </div>
 
                 <button 

@@ -86,8 +86,8 @@ export default function Footer() {
             © 2026 ParvInfoSoft. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-white/40 hover:text-white text-xs transition-colors">Privacy Policy</a>
-            <a href="#" className="text-white/40 hover:text-white text-xs transition-colors">Terms of Service</a>
+            <Link href="/privacy-policy" className="text-white/40 hover:text-white text-xs transition-colors">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="text-white/40 hover:text-white text-xs transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
