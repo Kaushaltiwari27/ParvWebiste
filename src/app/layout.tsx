@@ -27,15 +27,40 @@ export const metadata: Metadata = {
   title: "ParvInfoSoft | AI Training Institute & IT Services Company in Surat, India",
   description: "Learn AI, automation, web development and business growth with ParvInfoSoft. Premium AI training institute and IT solutions company serving Surat, Gujarat, and all of India.",
   keywords: [
-    "AI course in Surat", 
-    "Best AI institute in Surat", 
-    "Website development company Surat", 
-    "AI automation company India", 
-    "Lead generation agency Surat",
-    "Digital skills training",
-    "CRM development company",
-    "ParvInfoSoft training",
-    "IT company near me"
+    "AI course online","Artificial Intelligence training","Learn AI from scratch","AI certification course",
+    "Machine learning course online","Data science course online","Deep learning course","Generative AI course",
+    "ChatGPT course for beginners","AI tools training","AI automation tools","AI agents development",
+    "No code AI course","Python for AI","AI for beginners",
+
+    "Best AI course in India","AI training institute India","Data science institute India","AI certification India",
+    "IT training institute India","Software training India","Digital skills training India","AI development company India",
+    "Automation company India","IT services company India","Startup tech services India",
+
+    "AI course in Surat","Best AI institute in Surat","Data science course Surat","IT training institute Surat",
+    "Software company in Surat","Website development company Surat","Digital marketing agency Surat",
+    "AI automation company Surat","Lead generation company Surat","AI course in Gujarat",
+    "Best IT institute in Gujarat","Data science training Gujarat","Software development Gujarat","AI training Gujarat",
+    "Tech institute Gujarat",
+
+    "AI automation services","AI development company","Web development services","Custom software development",
+    "SaaS development company","CRM development services","Lead generation services worldwide",
+    "Digital transformation company","Business automation services","AI consulting services",
+    "IT outsourcing company","Remote development team","AI solutions for business","Automation agency global",
+
+    "Hire AI developer","Hire web developer","Hire software developer India","AI solutions for startups",
+    "Automation for small business","CRM for small business","AI chatbot for business",
+    "WhatsApp automation services","Marketing automation agency","Lead generation for business",
+    "Growth hacking agency","Build AI chatbot for website","Business process automation",
+
+    "Best AI course for beginners 2026","Learn AI step by step","AI course with placement India",
+    "Affordable AI course online","Learn AI without coding","AI tools for business growth",
+    "Automation tools for startups","How to start AI agency","AI for freelancers","AI for business owners",
+    "Best data science course for beginners","Online AI classes with certificate","AI course for students India",
+    "Practical AI training program",
+
+    "Future of AI careers","AI vs human jobs","AI tools you must know","Top AI tools 2026",
+    "AI trends 2026","Best tools for productivity","Automation hacks for business",
+    "AI side hustle ideas","Earn money using AI","AI business ideas"
   ],
   alternates: {
     canonical: "https://www.parvinfosoft.com",
