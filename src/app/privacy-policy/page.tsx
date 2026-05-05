@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
             <p className="text-white/70 leading-relaxed">
               Welcome to ParvInfoSoft ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. 
               This Privacy Policy applies to our website (parvinfosoft.com), our AI training programs, and our IT/software development services. 
-              If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us at parvinfosoftacademy@gmail.com.
+              If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us at parvinfosoftadmin@gmail.com.
             </p>
           </section>
 
@@ -73,7 +73,7 @@ export default function PrivacyPolicyPage() {
           <section className="mb-12">
             <h2 className="text-2xl font-medium text-white mb-4">6. Contact Us</h2>
             <p className="text-white/70 leading-relaxed">
-              If you have questions or comments about this notice, you may email us at <strong>parvinfosoftacademy@gmail.com</strong> or contact us by post at:<br/><br/>
+              If you have questions or comments about this notice, you may email us at <strong>parvinfosoftadmin@gmail.com</strong> or contact us by post at:<br/><br/>
               ParvInfoSoft<br/>
               4019 The Palladium Mall, Near Vijaynagar, Chikuwadi<br/>
               Nana Varachha, Surat, Gujarat 395010<br/>

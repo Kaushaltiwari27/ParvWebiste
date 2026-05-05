@@ -44,8 +44,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:parvinfosoftacademy@gmail.com" className="text-white/50 hover:text-white transition-colors text-sm">
-                  Email: parvinfosoftacademy@gmail.com
+                <a href="mailto:parvinfosoftadmin@gmail.com" className="text-white/50 hover:text-white transition-colors text-sm">
+                  Email: parvinfosoftadmin@gmail.com
                 </a>
               </li>
               <li className="pt-2 border-t border-white/5">
