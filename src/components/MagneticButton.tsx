@@ -13,8 +13,9 @@ export default function MagneticButton({ children, className = "" }: { children:
     const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
-    // Move slightly towards cursor (0.2 strength)
-    setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+    
+    // Increased strength for a stronger "pull"
+    setPosition({ x: middleX * 0.4, y: middleY * 0.4 });
   };
 
   const reset = () => {
@@ -28,9 +29,14 @@ export default function MagneticButton({ children, className = "" }: { children:
       onMouseLeave={reset}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={`inline-block ${className}`}
+      className={`inline-block cursor-pointer ${className}`}
     >
-      {children}
+      <motion.div
+        animate={{ x: position.x * 0.5, y: position.y * 0.5 }}
+        transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      >
+        {children}
+      </motion.div>
     </motion.div>
   );
 }
