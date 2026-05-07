@@ -64,7 +64,7 @@ export default function SuccessStories() {
   }, [width, isHovered, controls]);
 
   return (
-    <section id="success-stories" className="py-32 bg-black relative border-t border-white/5 overflow-hidden">
+    <section id="success-stories" className="py-32 bg-transparent relative border-t border-white/5 overflow-hidden">
       
       {/* Background Orbs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">

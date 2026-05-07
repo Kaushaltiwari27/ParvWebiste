@@ -93,7 +93,7 @@ export default function AISearchModal({ isOpen, onClose }: AISearchModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-transparent/80 backdrop-blur-sm"
           ></motion.div>
 
           {/* Modal */}
@@ -180,7 +180,7 @@ export default function AISearchModal({ isOpen, onClose }: AISearchModalProps) {
             </div>
 
             {/* Footer */}
-            <div className="p-3 border-t border-white/5 bg-black/50 text-center flex items-center justify-center gap-4 text-xs text-white/30">
+            <div className="p-3 border-t border-white/5 bg-transparent/50 text-center flex items-center justify-center gap-4 text-xs text-white/30">
               <span className="flex items-center gap-1"><Command size={12}/> K to open search</span>
               <span className="flex items-center gap-1"><ArrowRight size={12}/> to navigate</span>
             </div>

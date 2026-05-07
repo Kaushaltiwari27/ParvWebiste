@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function MeetFounder() {
   return (
-    <section id="founder" className="py-32 bg-black relative border-t border-white/5 overflow-hidden">
+    <section id="founder" className="py-32 bg-transparent relative border-t border-white/5 overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           

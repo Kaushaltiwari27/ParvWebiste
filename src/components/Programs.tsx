@@ -45,7 +45,7 @@ const features = [
 
 export default function Programs() {
   return (
-    <section id="programs" className="py-24 bg-primary-dark">
+    <section id="programs" className="py-24 bg-transparent">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="border-t-2 border-accent-electric w-16 mb-8 mx-auto"></div>
         <div className="text-center mb-16 max-w-3xl mx-auto">
@@ -74,7 +74,7 @@ export default function Programs() {
                 viewport={{ once: false }}
                 transition={{ delay: i * 0.1 }}
                 className={`relative flex flex-col p-8 border border-border-color overflow-hidden group ${
-                  prog.popular ? "bg-primary-navy" : "bg-primary-dark"
+                  prog.popular ? "bg-primary-navy" : "bg-transparent"
                 }`}
               >
                 {/* Background Image for Card */}
@@ -101,7 +101,7 @@ export default function Programs() {
                   )}
                   
                   <div className={`w-14 h-14 flex items-center justify-center mb-6 border border-border-color ${
-                    prog.popular ? "bg-accent-electric text-white border-none" : "bg-primary-dark text-accent-electric"
+                    prog.popular ? "bg-accent-electric text-white border-none" : "bg-transparent text-accent-electric"
                   }`}>
                     <Icon size={28} />
                   </div>
@@ -134,7 +134,7 @@ export default function Programs() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
-          className="bg-primary-dark border border-border-color overflow-hidden hidden md:block"
+          className="bg-transparent border border-border-color overflow-hidden hidden md:block"
         >
           <div className="p-8 border-b border-border-color text-center bg-primary-navy">
             <h3 className="font-inter text-2xl font-black uppercase tracking-widest text-white">Compare Features</h3>

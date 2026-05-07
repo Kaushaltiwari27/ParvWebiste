@@ -23,7 +23,7 @@ const tools = [
 
 export default function ToolsMaster() {
   return (
-    <section className="py-24 bg-primary-dark overflow-hidden">
+    <section className="py-24 bg-transparent overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <motion.h2 

@@ -154,7 +154,7 @@ export default function Portfolio() {
                 className={`shrink-0 px-5 py-2 rounded-full text-sm font-medium transition-all ${
                   activeCategory === category 
                     ? "bg-accent-electric text-black shadow-[0_0_15px_rgba(78,163,224,0.3)]" 
-                    : "bg-black text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
+                    : "bg-transparent text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
                 }`}
               >
                 {category}
@@ -176,7 +176,7 @@ export default function Portfolio() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
                 key={project.id}
-                className="group relative bg-black border border-white/10 rounded-3xl overflow-hidden h-[400px]"
+                className="group relative bg-transparent border border-white/10 rounded-3xl overflow-hidden h-[400px]"
               >
                 {/* Background Image/Gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${project.imageGrad} transition-transform duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-80`}></div>
@@ -187,7 +187,7 @@ export default function Portfolio() {
                 <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
                   
                   {/* Top Category Badge */}
-                  <div className="absolute top-6 left-6 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 flex items-center gap-2">
+                  <div className="absolute top-6 left-6 px-3 py-1.5 rounded-full bg-transparent/50 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 flex items-center gap-2">
                     <project.icon size={12} className="text-accent-electric" />
                     {project.category}
                   </div>

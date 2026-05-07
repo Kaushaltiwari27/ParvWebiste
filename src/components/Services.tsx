@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { Cpu, LayoutTemplate, Smartphone, Database, Megaphone, GraduationCap } from "lucide-react";
 import Image from "next/image";
+import TiltCard from "./TiltCard";
+import TextDecode from "./TextDecode";
 
 const services = [
   { title: "AI Automation Solutions", icon: Cpu },
@@ -15,7 +17,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-32 bg-black relative border-t border-white/5 overflow-hidden">
+    <section id="services" className="py-32 bg-transparent relative border-t border-white/5 overflow-hidden">
       
       {/* Ambient Robotic Hand Background */}
       <div className="absolute right-0 top-0 bottom-0 w-1/2 z-0 pointer-events-none opacity-20 mix-blend-screen">
@@ -37,7 +39,7 @@ export default function Services() {
           className="mb-20 text-center"
         >
           <h2 className="text-[40px] md:text-[56px] font-medium text-white leading-[1.1] mb-6">
-            What We Build
+            <TextDecode text="What We Build" />
           </h2>
           <div className="w-[60px] h-[2px] bg-accent-electric mx-auto"></div>
         </motion.div>
@@ -52,21 +54,22 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="group relative bg-[#050505] border border-white/10 rounded-2xl p-10 overflow-hidden cursor-pointer"
+                className="group cursor-pointer"
               >
-                {/* Glow Effect */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[150px] bg-accent-electric/20 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-                
-                {/* Top border highlight */}
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-electric to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <TiltCard className="p-10">
+                  {/* Glow Effect */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[150px] bg-accent-electric/20 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  
+                  {/* Top border highlight */}
+                  <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-electric to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:bg-accent-electric/10 transition-colors">
-                    <Icon size={28} className="text-white/70 group-hover:text-accent-electric transition-colors" />
+                  <div className="relative z-10 flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:bg-accent-electric/10 transition-colors">
+                      <Icon size={28} className="text-white/70 group-hover:text-accent-electric transition-colors" />
+                    </div>
+                    <h3 className="text-xl font-medium text-white tracking-wide">{service.title}</h3>
                   </div>
-                  <h3 className="text-xl font-medium text-white tracking-wide">{service.title}</h3>
-                </div>
+                </TiltCard>
               </motion.div>
             );
           })}

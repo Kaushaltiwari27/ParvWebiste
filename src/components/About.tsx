@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import TextDecode from "./TextDecode";
+
 const cards = [
   "AI Automation",
   "Web Development",
@@ -14,7 +16,7 @@ const cards = [
 
 export default function About() {
   return (
-    <section id="about" className="py-32 bg-black relative overflow-hidden">
+    <section id="about" className="py-32 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex flex-col lg:flex-row items-center gap-20">
           
@@ -32,7 +34,7 @@ export default function About() {
                     WebkitTextFillColor: "transparent",
                   }}
               >
-                Where AI Meets Real Business Growth
+                <TextDecode text="Where AI Meets Real Business Growth" />
               </h2>
               <p className="text-[16px] md:text-[18px] text-white/60 leading-relaxed max-w-[500px]">
                 ParvInfoSoft is not just a training institute. We are an AI-first IT company helping businesses automate systems, scale digitally, and grow faster through technology. We train future-ready professionals while building real-world solutions.
@@ -40,23 +42,26 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Right Column: Floating Cards & Hologram Dashboard */}
-          <div className="lg:w-1/2 relative w-full h-[400px]">
+          {/* Right Column: Floating Cards & Interactive 3D Model */}
+          <div className="lg:w-1/2 relative w-full h-[500px]">
             <div className="relative w-full h-full flex items-center justify-center">
-              {/* Hologram Dashboard Image */}
+              {/* Spline 3D Interactive Model */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: false }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
-                className="absolute inset-0 z-0 pointer-events-none"
+                className="absolute inset-0 z-0"
               >
-                <Image 
-                  src="/about_ai.png" 
-                  alt="Futuristic Business Dashboard" 
-                  fill
-                  className="object-contain opacity-40 mix-blend-screen"
-                />
+                <div className="w-full h-full rounded-3xl overflow-hidden border border-white/5 opacity-80 mix-blend-screen mask-radial-fade">
+                  <iframe 
+                    src='https://my.spline.design/abstractcore-25c28ec2cb58ab4db1277a0279d46c43/' 
+                    frameBorder='0' 
+                    width='100%' 
+                    height='100%'
+                    title="Interactive 3D Abstract Core"
+                  ></iframe>
+                </div>
               </motion.div>
 
               {cards.map((card, i) => (

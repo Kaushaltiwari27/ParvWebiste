@@ -19,6 +19,11 @@ body {
 }
 
 @layer utilities {
+  .mask-radial-fade {
+    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  }
+
   .text-balance {
     text-wrap: balance;
   }

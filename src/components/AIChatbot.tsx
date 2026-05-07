@@ -247,7 +247,7 @@ export default function AIChatbot() {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 border-t border-white/10 bg-black relative">
+            <div className="p-4 border-t border-white/10 bg-transparent relative">
               <form 
                 onSubmit={(e) => { e.preventDefault(); handleSend(inputText); }}
                 className="flex items-center gap-2"

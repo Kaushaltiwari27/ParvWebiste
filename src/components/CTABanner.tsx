@@ -6,9 +6,9 @@ import Link from "next/link";
 
 export default function CTABanner() {
   return (
-    <section className="py-32 bg-black relative border-t border-white/5 overflow-hidden">
+    <section className="py-32 bg-transparent relative border-t border-white/5 overflow-hidden">
       {/* Ultra-Premium Minimalist Aurora Background */}
-      <div className="absolute inset-0 z-0 bg-black">
+      <div className="absolute inset-0 z-0 bg-transparent">
         {/* Animated Aurora Orbs */}
         <motion.div 
           animate={{ 
@@ -70,7 +70,7 @@ export default function CTABanner() {
             <MagneticButton>
               <Link 
                 href="/get-started"
-                className="px-[40px] py-[18px] rounded-full border border-white/20 text-white font-medium text-[16px] hover:bg-white/10 transition-colors w-full sm:w-auto active:scale-95 bg-black/50 backdrop-blur-md"
+                className="px-[40px] py-[18px] rounded-full border border-white/20 text-white font-medium text-[16px] hover:bg-white/10 transition-colors w-full sm:w-auto active:scale-95 bg-transparent/50 backdrop-blur-md"
               >
                 Join Waitlist
               </Link>

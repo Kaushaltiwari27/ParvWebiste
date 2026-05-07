@@ -35,7 +35,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-32 bg-black relative border-t border-white/5">
+    <section id="faq" className="py-32 bg-transparent relative border-t border-white/5">
       <div className="container mx-auto px-6 max-w-4xl">
         
         <motion.div

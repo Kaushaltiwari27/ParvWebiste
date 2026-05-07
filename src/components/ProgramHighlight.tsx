@@ -15,7 +15,7 @@ const features = [
 
 export default function ProgramHighlight() {
   return (
-    <section className="py-32 bg-black relative border-t border-white/5 overflow-hidden">
+    <section className="py-32 bg-transparent relative border-t border-white/5 overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           
@@ -72,7 +72,7 @@ export default function ProgramHighlight() {
                 className="relative inline-flex items-center justify-center p-[1px] rounded-full overflow-hidden group bg-white/20 transition-all hover:bg-white/40"
               >
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] bg-white opacity-60 blur-[3px] group-hover:opacity-100 transition-opacity"></div>
-                <div className="relative bg-black rounded-full px-[32px] py-[16px] h-full w-full flex items-center justify-center">
+                <div className="relative bg-transparent rounded-full px-[32px] py-[16px] h-full w-full flex items-center justify-center">
                   <span className="text-white text-[15px] font-medium tracking-wide">Explore Program</span>
                 </div>
               </Link>

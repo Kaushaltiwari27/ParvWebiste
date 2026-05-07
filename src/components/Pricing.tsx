@@ -31,7 +31,7 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-32 bg-black relative border-t border-white/5 overflow-hidden">
+    <section id="pricing" className="py-32 bg-transparent relative border-t border-white/5 overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         
         <motion.div

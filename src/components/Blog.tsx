@@ -70,13 +70,13 @@ export default function Blog() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
               transition={{ delay: i * 0.1 }}
-              className="bg-primary-dark overflow-hidden group cursor-pointer border border-border-color hover:border-white transition-all"
+              className="bg-transparent overflow-hidden group cursor-pointer border border-border-color hover:border-white transition-all"
             >
               {/* Image Placeholder */}
               <div className="h-48 w-full relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
                 <img src={post.image} alt={post.title} className="w-full h-full object-cover opacity-80" />
-                <div className="absolute inset-0 bg-primary-dark/40 group-hover:bg-transparent transition-colors"></div>
-                <div className="absolute top-4 left-4 bg-primary-dark px-3 py-1 text-xs font-bold text-accent-electric uppercase tracking-widest border border-border-color">
+                <div className="absolute inset-0 bg-transparent/40 group-hover:bg-transparent transition-colors"></div>
+                <div className="absolute top-4 left-4 bg-transparent px-3 py-1 text-xs font-bold text-accent-electric uppercase tracking-widest border border-border-color">
                   {post.category}
                 </div>
               </div>

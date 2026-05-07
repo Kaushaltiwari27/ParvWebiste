@@ -13,7 +13,7 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-32 bg-black relative border-t border-white/5 overflow-hidden">
+    <section className="py-32 bg-transparent relative border-t border-white/5 overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
         
         <motion.div

@@ -4,6 +4,7 @@ import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import AIChatbot from "@/components/AIChatbot";
 import Preloader from "@/components/Preloader";
+import InteractiveBackground from "@/components/InteractiveBackground";
 
 const sora = Sora({ 
   subsets: ["latin"], 
@@ -197,7 +198,8 @@ export default function RootLayout({
       <head>
         <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet" />
       </head>
-      <body className={`font-general antialiased bg-primary-dark text-white selection:bg-accent-electric selection:text-white`}>
+      <body className={`font-general antialiased bg-transparent text-white selection:bg-accent-electric selection:text-white`}>
+        <InteractiveBackground />
         <Preloader />
         <CustomCursor />
         <script

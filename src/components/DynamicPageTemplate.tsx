@@ -14,14 +14,14 @@ export default function DynamicPageTemplate({ data, category }: { data: PageCont
 
   if (!data) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center text-white">
+      <div className="min-h-screen bg-transparent flex items-center justify-center text-white">
         <h2>Page not found.</h2>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-black pt-32 pb-24 font-general relative overflow-hidden">
+    <main className="min-h-screen bg-transparent pt-32 pb-24 font-general relative overflow-hidden">
       
       {/* Ambient glowing background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent-electric/10 blur-[150px] rounded-full mix-blend-screen pointer-events-none -z-10"></div>

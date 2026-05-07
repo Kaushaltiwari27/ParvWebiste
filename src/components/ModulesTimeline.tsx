@@ -17,7 +17,7 @@ const modules = [
 
 export default function ModulesTimeline() {
   return (
-    <section className="py-32 bg-black relative overflow-hidden">
+    <section className="py-32 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-4xl relative z-10">
         
         <motion.div
@@ -58,7 +58,7 @@ export default function ModulesTimeline() {
                   className={`relative flex items-center ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'} pl-16 md:pl-0`}
                 >
                   {/* Number Node */}
-                  <div className="absolute left-0 md:left-1/2 w-14 h-14 bg-black border-2 border-white/20 rounded-full flex items-center justify-center -translate-x-1/2 z-10 shadow-[0_0_20px_rgba(0,0,0,1)] group hover:border-accent-electric transition-colors">
+                  <div className="absolute left-0 md:left-1/2 w-14 h-14 bg-transparent border-2 border-white/20 rounded-full flex items-center justify-center -translate-x-1/2 z-10 shadow-[0_0_20px_rgba(0,0,0,1)] group hover:border-accent-electric transition-colors">
                     <div className="w-10 h-10 bg-[#0A0A0A] rounded-full flex items-center justify-center text-white/70 font-mono text-sm group-hover:text-accent-electric group-hover:shadow-[0_0_15px_rgba(78,163,224,0.4)] transition-all">
                       {(index + 1).toString().padStart(2, '0')}
                     </div>

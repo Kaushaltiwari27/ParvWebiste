@@ -77,7 +77,7 @@ export default function LiveAIDemos() {
   };
 
   return (
-    <section className="py-32 bg-black relative border-t border-white/5 overflow-hidden">
+    <section className="py-32 bg-transparent relative border-t border-white/5 overflow-hidden">
       
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-accent-electric/5 blur-[120px] rounded-full pointer-events-none"></div>
@@ -163,10 +163,10 @@ export default function LiveAIDemos() {
                           }}
                           className="bg-[#050505] border border-white/10 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-accent-electric cursor-pointer"
                         >
-                          <option value="₹" className="bg-black text-white">INR (₹)</option>
-                          <option value="$" className="bg-black text-white">USD ($)</option>
-                          <option value="€" className="bg-black text-white">EUR (€)</option>
-                          <option value="£" className="bg-black text-white">GBP (£)</option>
+                          <option value="₹" className="bg-transparent text-white">INR (₹)</option>
+                          <option value="$" className="bg-transparent text-white">USD ($)</option>
+                          <option value="€" className="bg-transparent text-white">EUR (€)</option>
+                          <option value="£" className="bg-transparent text-white">GBP (£)</option>
                         </select>
                       </div>
                       <input 
@@ -316,7 +316,7 @@ export default function LiveAIDemos() {
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 20 }}
-                    className="bg-black border border-white/10 p-10 rounded-2xl relative overflow-hidden"
+                    className="bg-transparent border border-white/10 p-10 rounded-2xl relative overflow-hidden"
                   >
                     <div className="absolute top-0 left-0 w-1 h-full bg-accent-electric"></div>
                     <div className="inline-block px-3 py-1 bg-white/10 text-white/80 text-xs font-medium rounded-full mb-6 uppercase tracking-widest border border-white/5">
