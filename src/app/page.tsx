@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import TechMarquee from "@/components/TechMarquee";
 import StatsStrip from "@/components/StatsStrip";
 import About from "@/components/About";
-import HorizontalTickerScroll from "@/components/HorizontalTickerScroll";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ProgramHighlight from "@/components/ProgramHighlight";
@@ -24,7 +23,6 @@ export default function Home() {
       <TechMarquee />
       <StatsStrip />
       <About />
-      <HorizontalTickerScroll />
       <Services />
       <WhyChooseUs />
       <ProgramHighlight />
