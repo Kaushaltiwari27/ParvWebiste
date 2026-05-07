@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 import MagneticButton from "./MagneticButton";
 import Link from "next/link";
-import TextDecode from "./TextDecode";
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -91,7 +90,7 @@ export default function Hero() {
             color: "transparent"
           }}
         >
-          <TextDecode text="Building Digital Futures at the Speed of Innovation" />
+          Building Digital Futures at the Speed of Innovation
         </motion.h1>
 
         {/* Subtitle */}
