@@ -1,60 +1,39 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 
 export default function TextDecode({ text, className = "" }: { text: string, className?: string }) {
-  // Split text into words, then words into characters for smooth staggering
-  const words = text.split(" ");
+  // Start with empty string to avoid hydration mismatch, or just start with scrambled
+  const [displayText, setDisplayText] = useState("");
+  const chars = "abcdefghijklmnopqrstuvwxyz0123456789"; // Using uniform width characters to prevent layout jitter
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: 0.1 * i },
-    }),
-  };
-
-  const child = {
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
-      },
-    },
-    hidden: {
-      opacity: 0,
-      y: 20,
-      filter: "blur(10px)",
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
-      },
-    },
-  };
+  useEffect(() => {
+    let iteration = 0;
+    
+    const interval = setInterval(() => {
+      setDisplayText(
+        text.split("").map((letter, index) => {
+          if (index < iteration) {
+            return text[index];
+          }
+          if (letter === " " || letter === "\n") return letter;
+          return chars[Math.floor(Math.random() * chars.length)];
+        }).join("")
+      );
+      
+      if (iteration >= text.length) {
+        clearInterval(interval);
+      }
+      
+      iteration += 1 / 2; // Controls the speed of the decode
+    }, 20); // 20ms is buttery smooth (50fps)
+    
+    return () => clearInterval(interval);
+  }, [text]);
 
   return (
-    <motion.span
-      className={`inline-flex flex-wrap ${className}`}
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-    >
-      {words.map((word, index) => (
-        <span key={index} className="inline-flex mr-[0.25em]">
-          {word.split("").map((letter, letterIndex) => (
-            <motion.span key={letterIndex} variants={child} className="inline-block">
-              {letter}
-            </motion.span>
-          ))}
-        </span>
-      ))}
-    </motion.span>
+    <span className={className}>
+      {displayText}
+    </span>
   );
 }

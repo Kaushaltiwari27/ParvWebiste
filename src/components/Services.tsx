@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Cpu, LayoutTemplate, Smartphone, Database, Megaphone, GraduationCap } from "lucide-react";
 import Image from "next/image";
 import TiltCard from "./TiltCard";
+import TextDecode from "./TextDecode";
 
 
 const services = [
@@ -39,7 +40,7 @@ export default function Services() {
           className="mb-20 text-center"
         >
           <h2 className="text-[40px] md:text-[56px] font-medium text-white leading-[1.1] mb-6">
-            What We Build
+            <TextDecode text="What We Build" />
           </h2>
           <div className="w-[60px] h-[2px] bg-accent-electric mx-auto"></div>
         </motion.div>

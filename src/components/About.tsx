@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-
-
+import TextDecode from "./TextDecode";
 
 const cards = [
   "AI Automation",
@@ -34,7 +33,7 @@ export default function About() {
                     WebkitTextFillColor: "transparent",
                   }}
               >
-                Where AI Meets Real Business Growth
+                <TextDecode text="Where AI Meets Real Business Growth" />
               </h2>
               <p className="text-[16px] md:text-[18px] text-white/60 leading-relaxed max-w-[500px]">
                 ParvInfoSoft is not just a training institute. We are an AI-first IT company helping businesses automate systems, scale digitally, and grow faster through technology. We train future-ready professionals while building real-world solutions.
