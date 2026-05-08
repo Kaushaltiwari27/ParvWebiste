@@ -77,13 +77,15 @@ export default function MeetFounder() {
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
     // ── Set each card to its "exploded" start position ────────
-    gsap.set(cards, (i) => ({
-      x:       stats[i].explodeX,
-      y:       stats[i].explodeY,
-      opacity: 0,
-      scale:   0.5,
-      rotation: (i % 2 === 0 ? -1 : 1) * 15,
-    }));
+    cards.forEach((card, i) => {
+      gsap.set(card, {
+        x:        stats[i].explodeX,
+        y:        stats[i].explodeY,
+        opacity:  0,
+        scale:    0.5,
+        rotation: (i % 2 === 0 ? -1 : 1) * 15,
+      });
+    });
 
     // ── Phase 1: cards fly IN to assembled positions ──────────
     const tl = gsap.timeline({
