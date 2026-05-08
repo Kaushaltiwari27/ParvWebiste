@@ -3,11 +3,17 @@
 /**
  * CinematicStoryScroll.tsx
  * ─────────────────────────────────────────────────────────────
- * Premium GSAP + ScrollTrigger horizontal storytelling strip.
- * - Single pinned section, scrub-driven horizontal flow
- * - Inline SVG glyphs act as punctuation between text phrases
- * - Matches ParvInfoSoft's dark premium aesthetic
- * - Cleans up GSAP instances properly on unmount
+ * Awwwards-quality GSAP horizontal storytelling ribbon.
+ *
+ * Architecture:
+ *  - Section pins during horizontal travel (GSAP ScrollTrigger)
+ *  - ONE long flex track translates on X via scrub tween
+ *  - SVG glyphs are inline punctuation — not separate components
+ *  - Layered parallax: track at 1×, accent layer at 0.6×
+ *  - Floating micro-animations on SVG elements via GSAP ticker
+ *  - Fully responsive: cinematic on desktop, adapted on mobile
+ *  - Zero hydration issues (all GSAP inside useEffect)
+ *  - Proper cleanup on unmount
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -15,277 +21,429 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// ── Inline SVG primitives ─────────────────────────────────────
+// ─── SVG Primitive Components ────────────────────────────────
+// Each is self-contained, aria-hidden, uses the site palette.
 
-/** Glowing electric dot  */
-const GlowDot = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-    <circle cx="10" cy="10" r="3" fill="#4EA3E0" />
-    <circle cx="10" cy="10" r="7" fill="#4EA3E0" fillOpacity="0.15" />
-    <circle cx="10" cy="10" r="10" fill="#4EA3E0" fillOpacity="0.06" />
+/** Minimal glowing node — acts like a full-stop */
+const NodeDot = ({ size = 10, color = "#4EA3E0" }: { size?: number; color?: string }) => (
+  <svg
+    width={size * 3}
+    height={size * 3}
+    viewBox={`0 0 ${size * 3} ${size * 3}`}
+    fill="none"
+    aria-hidden
+    className="inline-block align-middle shrink-0"
+  >
+    <circle cx={size * 1.5} cy={size * 1.5} r={size * 0.3} fill={color} />
+    <circle cx={size * 1.5} cy={size * 1.5} r={size * 0.7} fill={color} fillOpacity="0.18" />
+    <circle cx={size * 1.5} cy={size * 1.5} r={size * 1.4} fill={color} fillOpacity="0.06" />
   </svg>
 );
 
-/** Flowing curved arrow  */
-const CurveArrow = () => (
-  <svg width="80" height="28" viewBox="0 0 80 28" fill="none" aria-hidden>
+/** Smooth S-curve connector with arrowhead */
+const FlowArrow = () => (
+  <svg width="100" height="32" viewBox="0 0 100 32" fill="none" aria-hidden
+    className="inline-block align-middle shrink-0">
     <path
-      d="M0 14 Q20 2 40 14 Q60 26 80 14"
-      stroke="url(#ca-grad)"
-      strokeWidth="1.4"
+      d="M0 16 C25 4, 45 28, 70 16 S90 4, 100 16"
+      stroke="url(#fa-g)"
+      strokeWidth="1.2"
       fill="none"
       strokeLinecap="round"
     />
-    <path
-      d="M68 8 L80 14 L68 20"
-      stroke="#4EA3E0"
-      strokeWidth="1.4"
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    {/* Arrowhead */}
+    <path d="M88 10 L100 16 L88 22" stroke="#4EA3E0" strokeWidth="1.2"
+      fill="none" strokeLinecap="round" strokeLinejoin="round" />
     <defs>
-      <linearGradient id="ca-grad" x1="0" y1="0" x2="80" y2="0">
-        <stop offset="0%" stopColor="#4EA3E0" stopOpacity="0.1" />
-        <stop offset="50%" stopColor="#4EA3E0" stopOpacity="0.8" />
-        <stop offset="100%" stopColor="#a855f7" stopOpacity="0.1" />
+      <linearGradient id="fa-g" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0%"   stopColor="#4EA3E0" stopOpacity="0.05" />
+        <stop offset="50%"  stopColor="#4EA3E0" stopOpacity="0.9"  />
+        <stop offset="100%" stopColor="#a855f7" stopOpacity="0.05" />
       </linearGradient>
     </defs>
   </svg>
 );
 
-/** Minimalist AI neural node  */
-const NeuralNode = () => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden>
-    {/* Connecting lines */}
-    <line x1="24" y1="8"  x2="8"  y2="24" stroke="#4EA3E0" strokeOpacity="0.3" strokeWidth="1" />
-    <line x1="24" y1="8"  x2="40" y2="24" stroke="#4EA3E0" strokeOpacity="0.3" strokeWidth="1" />
-    <line x1="8"  y1="24" x2="24" y2="40" stroke="#4EA3E0" strokeOpacity="0.3" strokeWidth="1" />
-    <line x1="40" y1="24" x2="24" y2="40" stroke="#4EA3E0" strokeOpacity="0.3" strokeWidth="1" />
+/** Minimal neural mesh — 5-node graph */
+const NeuralMesh = () => (
+  <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden
+    className="inline-block align-middle shrink-0">
+    {/* Edges */}
+    {[
+      [26, 6,  6, 26], [26, 6, 46, 26],
+      [6, 26,  26, 46], [46, 26, 26, 46],
+      [6, 26, 46, 26],
+    ].map(([x1, y1, x2, y2], i) => (
+      <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+        stroke="#4EA3E0" strokeOpacity="0.25" strokeWidth="0.8" />
+    ))}
     {/* Nodes */}
-    <circle cx="24" cy="8"  r="3" fill="#4EA3E0" fillOpacity="0.9" />
-    <circle cx="8"  cy="24" r="2" fill="#a855f7" fillOpacity="0.7" />
-    <circle cx="40" cy="24" r="2" fill="#22d3ee" fillOpacity="0.7" />
-    <circle cx="24" cy="40" r="3" fill="#4EA3E0" fillOpacity="0.9" />
+    {[[26, 6], [6, 26], [46, 26], [26, 46]].map(([cx, cy], i) => (
+      <circle key={i} cx={cx} cy={cy} r="2.5"
+        fill={["#4EA3E0","#a855f7","#22d3ee","#4EA3E0"][i]}
+        fillOpacity="0.85" />
+    ))}
     {/* Core */}
-    <circle cx="24" cy="24" r="4" fill="#4EA3E0" fillOpacity="0.15" />
-    <circle cx="24" cy="24" r="2" fill="#4EA3E0" />
+    <circle cx="26" cy="26" r="5" fill="#4EA3E0" fillOpacity="0.12" />
+    <circle cx="26" cy="26" r="2" fill="#4EA3E0" />
   </svg>
 );
 
-/** Abstract speed / growth lines  */
-const SpeedLines = () => (
-  <svg width="60" height="30" viewBox="0 0 60 30" fill="none" aria-hidden>
-    <line x1="0" y1="8"  x2="50" y2="8"  stroke="#4EA3E0" strokeOpacity="0.5" strokeWidth="1.2" strokeLinecap="round" />
-    <line x1="0" y1="15" x2="60" y2="15" stroke="white"   strokeOpacity="0.2" strokeWidth="1"   strokeLinecap="round" />
-    <line x1="0" y1="22" x2="40" y2="22" stroke="#a855f7" strokeOpacity="0.5" strokeWidth="1.2" strokeLinecap="round" />
+/** Abstract velocity mark — three tapering lines */
+const VelocityMark = () => (
+  <svg width="48" height="28" viewBox="0 0 48 28" fill="none" aria-hidden
+    className="inline-block align-middle shrink-0">
+    <line x1="0" y1="7"  x2="38" y2="7"  stroke="#4EA3E0" strokeWidth="1.1" strokeLinecap="round" strokeOpacity="0.6" />
+    <line x1="0" y1="14" x2="48" y2="14" stroke="white"   strokeWidth="0.7" strokeLinecap="round" strokeOpacity="0.18" />
+    <line x1="0" y1="21" x2="30" y2="21" stroke="#a855f7" strokeWidth="1.1" strokeLinecap="round" strokeOpacity="0.5" />
   </svg>
 );
 
-/** Star / spark ornament  */
-const Spark = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-    <path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z"
-      fill="url(#spark-g)" />
+/** 4-point star ornament */
+const StarAccent = () => (
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden
+    className="inline-block align-middle shrink-0">
+    <path d="M11 1 L12.6 9.4 L21 11 L12.6 12.6 L11 21 L9.4 12.6 L1 11 L9.4 9.4 Z"
+      fill="url(#st-g)" />
     <defs>
-      <radialGradient id="spark-g" cx="50%" cy="50%" r="50%">
-        <stop offset="0%"   stopColor="#ffffff" />
-        <stop offset="100%" stopColor="#4EA3E0" stopOpacity="0.4" />
+      <radialGradient id="st-g" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.9" />
+        <stop offset="100%" stopColor="#4EA3E0" stopOpacity="0.2" />
       </radialGradient>
     </defs>
   </svg>
 );
 
-// ── Story content — text phrases interleaved with SVG glyphs ──
-type TextChunk = { kind: "text"; value: string };
-type GlyphChunk = { kind: "glyph"; el: React.ReactNode };
-type Chunk = TextChunk | GlyphChunk;
+/** Minimal bracket / code symbol */
+const CodeBracket = () => (
+  <svg width="28" height="36" viewBox="0 0 28 36" fill="none" aria-hidden
+    className="inline-block align-middle shrink-0">
+    <path d="M18 2 L8 18 L18 34" stroke="#4EA3E0" strokeWidth="1.5"
+      fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.6" />
+  </svg>
+);
 
-const story: Chunk[] = [
-  { kind: "text",  value: "Building scalable" },
-  { kind: "glyph", el: <CurveArrow /> },
-  { kind: "text",  value: "digital experiences" },
-  { kind: "glyph", el: <GlowDot /> },
-  { kind: "text",  value: "powered by AI" },
-  { kind: "glyph", el: <NeuralNode /> },
-  { kind: "text",  value: "creativity" },
-  { kind: "glyph", el: <SpeedLines /> },
-  { kind: "text",  value: "strategy" },
-  { kind: "glyph", el: <GlowDot /> },
-  { kind: "text",  value: "and modern development" },
-  { kind: "glyph", el: <CurveArrow /> },
-  { kind: "text",  value: "that helps businesses" },
-  { kind: "glyph", el: <Spark /> },
-  { kind: "text",  value: "grow faster" },
-  { kind: "glyph", el: <NeuralNode /> },
-  { kind: "text",  value: "together" },
-  { kind: "glyph", el: <Spark /> },
+// ─── Story Definition ────────────────────────────────────────
+// Text phrases and inline SVG glyphs living in one flat array.
+// This is what renders as the continuous sentence.
+
+type Phrase = { k: "phrase"; text: string; weight?: "bold" | "light" | "accent" };
+type Glyph  = { k: "glyph";  el: React.ReactNode; parallaxFactor?: number };
+type Gap    = { k: "gap";    size: number }; // variable horizontal breathing room
+type Story  = Phrase | Glyph | Gap;
+
+const story: Story[] = [
+  { k: "phrase", text: "Building",       weight: "bold"   },
+  { k: "gap",    size: 32                                  },
+  { k: "glyph",  el: <FlowArrow />,      parallaxFactor: 0.6 },
+  { k: "gap",    size: 32                                  },
+  { k: "phrase", text: "scalable",       weight: "light"  },
+  { k: "gap",    size: 12                                  },
+  { k: "phrase", text: "digital",        weight: "bold"   },
+  { k: "gap",    size: 12                                  },
+  { k: "phrase", text: "experiences",    weight: "bold"   },
+  { k: "gap",    size: 56                                  },
+  { k: "glyph",  el: <NodeDot />,        parallaxFactor: 0.4 },
+  { k: "gap",    size: 56                                  },
+  { k: "phrase", text: "powered by",     weight: "light"  },
+  { k: "gap",    size: 16                                  },
+  { k: "glyph",  el: <NeuralMesh />,     parallaxFactor: 0.55 },
+  { k: "gap",    size: 16                                  },
+  { k: "phrase", text: "AI",             weight: "accent" },
+  { k: "gap",    size: 48                                  },
+  { k: "glyph",  el: <VelocityMark />,   parallaxFactor: 0.5 },
+  { k: "gap",    size: 48                                  },
+  { k: "phrase", text: "creativity",     weight: "bold"   },
+  { k: "gap",    size: 16                                  },
+  { k: "glyph",  el: <NodeDot size={6} color="#a855f7" />, parallaxFactor: 0.3 },
+  { k: "gap",    size: 16                                  },
+  { k: "phrase", text: "strategy",       weight: "bold"   },
+  { k: "gap",    size: 56                                  },
+  { k: "glyph",  el: <FlowArrow />,      parallaxFactor: 0.65 },
+  { k: "gap",    size: 56                                  },
+  { k: "phrase", text: "and modern",     weight: "light"  },
+  { k: "gap",    size: 12                                  },
+  { k: "phrase", text: "development",    weight: "bold"   },
+  { k: "gap",    size: 48                                  },
+  { k: "glyph",  el: <CodeBracket />,    parallaxFactor: 0.45 },
+  { k: "gap",    size: 48                                  },
+  { k: "phrase", text: "that helps",     weight: "light"  },
+  { k: "gap",    size: 12                                  },
+  { k: "phrase", text: "businesses",     weight: "bold"   },
+  { k: "gap",    size: 48                                  },
+  { k: "glyph",  el: <StarAccent />,     parallaxFactor: 0.4 },
+  { k: "gap",    size: 48                                  },
+  { k: "phrase", text: "grow faster",    weight: "bold"   },
+  { k: "gap",    size: 32                                  },
+  { k: "glyph",  el: <NodeDot size={8} color="#22d3ee" />, parallaxFactor: 0.35 },
+  { k: "gap",    size: 32                                  },
+  { k: "phrase", text: "together",       weight: "accent" },
+  { k: "gap",    size: 80                                  },
 ];
 
-// ── Component ─────────────────────────────────────────────────
+// ─── Typography helpers ──────────────────────────────────────
+const weightClass: Record<string, string> = {
+  bold:   "font-semibold text-white/90",
+  light:  "font-light text-white/40",
+  accent: "font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#4EA3E0] to-[#a855f7]",
+};
 
+// ─── Component ───────────────────────────────────────────────
 export default function CinematicStoryScroll() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const trackRef   = useRef<HTMLDivElement>(null);
+  const sectionRef  = useRef<HTMLElement>(null);
+  const trackRef    = useRef<HTMLDivElement>(null);
+  const glyphRefs   = useRef<(HTMLSpanElement | null)[]>([]);
+  const floatTimers = useRef<gsap.core.Tween[]>([]);
 
   useEffect(() => {
-    // Register plugin only on client
     gsap.registerPlugin(ScrollTrigger);
 
     const section = sectionRef.current;
     const track   = trackRef.current;
     if (!section || !track) return;
 
-    // Calculate how far to scroll horizontally
-    // (track width  minus  one viewport width = total travel)
-    const getDistance = () => track.scrollWidth - window.innerWidth;
+    // ── Responsive: disable pin on mobile (too small to make sense)
+    const isMobile = window.innerWidth < 768;
 
-    // Build the GSAP tween
-    const tween = gsap.to(track, {
-      x: () => -getDistance(),
-      ease: "none", // linear — scrub handles easing
+    // ── 1. Main horizontal scrub tween ──────────────────────
+    const getDistance = () =>
+      Math.max(0, track.scrollWidth - window.innerWidth + 160); // +160px breathing room
+
+    const mainTween = gsap.to(track, {
+      x:    () => -getDistance(),
+      ease: "none",
     });
 
-    // Pin the section and scrub tween to vertical scroll
     const trigger = ScrollTrigger.create({
-      trigger: section,
-      start:   "top top",
-      // end scales with track width so speed feels constant
-      end:     () => `+=${getDistance()}`,
-      pin:     true,
-      anticipatePin: 1,
-      scrub:   1.2,           // slightly lagged for cinematic feel
-      animation: tween,
-      invalidateOnRefresh: true, // recalculate on resize
+      trigger:            section,
+      start:              "top top",
+      end:                () => `+=${isMobile ? getDistance() * 0.6 : getDistance()}`,
+      pin:                !isMobile,
+      anticipatePin:      1,
+      scrub:              isMobile ? 0.8 : 1.6, // more lag on desktop = more cinematic
+      animation:          mainTween,
+      invalidateOnRefresh: true,
+    });
+
+    // ── 2. Layered parallax on glyphs ────────────────────────
+    // Each glyph has a parallaxFactor — they move slightly slower
+    // than the main track, creating depth illusion.
+    glyphRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const factor = el.dataset.parallax ? parseFloat(el.dataset.parallax) : 0.5;
+      gsap.to(el, {
+        x:    () => getDistance() * factor * 0.25, // counter-translate
+        ease: "none",
+        scrollTrigger: {
+          trigger:            section,
+          start:              "top top",
+          end:                () => `+=${getDistance()}`,
+          scrub:              1.6,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    // ── 3. Subtle floating micro-animations on glyphs ────────
+    // Independent of scroll — they breathe on their own clock.
+    glyphRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const t = gsap.to(el, {
+        y:        gsap.utils.random(-5, 5),
+        rotation: gsap.utils.random(-4, 4),
+        duration: gsap.utils.random(2.2, 3.8),
+        ease:     "sine.inOut",
+        repeat:   -1,
+        yoyo:     true,
+        delay:    i * 0.3,
+      });
+      floatTimers.current.push(t);
+    });
+
+    // ── 4. Fade-in the section gracefully ────────────────────
+    gsap.from(section, {
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start:   "top 85%",
+        once:    true,
+      },
     });
 
     return () => {
       trigger.kill();
-      tween.kill();
+      mainTween.kill();
+      floatTimers.current.forEach((t) => t.kill());
+      ScrollTrigger.getAll().forEach((st) => {
+        if (st.trigger === section) st.kill();
+      });
     };
   }, []);
 
+  // Track glyph index separately for refs
+  let glyphIndex = 0;
+
   return (
-    /**
-     * SECTION — height: 100vh (the visible pinned frame)
-     * The extra scroll length comes from ScrollTrigger's end value.
-     */
     <section
       ref={sectionRef}
-      aria-label="Our story — horizontal scroll"
+      aria-label="Our story"
       style={{
-        position: "relative",
-        height:   "100vh",
-        overflow: "hidden",
-        /* Match site background */
-        background: "#030712",
+        position:     "relative",
+        height:       "100vh",
+        overflow:     "hidden",
+        background:   "#030712",
         borderTop:    "1px solid rgba(255,255,255,0.05)",
         borderBottom: "1px solid rgba(255,255,255,0.05)",
       }}
     >
-      {/* ── Edge fade masks ── */}
+      {/* ── Ambient light bloom ── */}
       <div
         aria-hidden
         style={{
           position:   "absolute",
-          inset:      0,
-          zIndex:     10,
+          top: "50%", left: "50%",
+          transform:  "translate(-50%, -50%)",
+          width:      "900px",
+          height:     "300px",
+          background: "radial-gradient(ellipse at center, rgba(78,163,224,0.05) 0%, transparent 65%)",
           pointerEvents: "none",
-          background: "linear-gradient(to right, #030712 0%, transparent 8%, transparent 92%, #030712 100%)",
         }}
       />
 
-      {/* ── Ambient background glow ── */}
+      {/* ── Edge fade masks ── */}
       <div
         aria-hidden
         style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width:  "600px",
-          height: "200px",
-          background: "radial-gradient(ellipse at center, rgba(78,163,224,0.06) 0%, transparent 70%)",
+          position: "absolute", inset: 0, zIndex: 10,
           pointerEvents: "none",
+          background:
+            "linear-gradient(to right, #030712 0%, transparent 6%, transparent 94%, #030712 100%)",
         }}
       />
 
-      {/* ── Centred label ── */}
+      {/* ── Eyebrow label ── */}
       <p
         aria-hidden
         style={{
-          position:        "absolute",
-          top:             "18px",
-          left:            "50%",
-          transform:       "translateX(-50%)",
-          fontSize:        "10px",
-          fontWeight:      600,
-          letterSpacing:   "0.25em",
-          textTransform:   "uppercase",
-          color:           "rgba(255,255,255,0.18)",
-          whiteSpace:      "nowrap",
-          zIndex:          20,
+          position: "absolute", top: "24px", left: "50%",
+          transform: "translateX(-50%)", zIndex: 20,
+          fontSize: "9px", fontWeight: 600,
+          letterSpacing: "0.3em", textTransform: "uppercase",
+          color: "rgba(255,255,255,0.15)", whiteSpace: "nowrap",
         }}
       >
-        Scroll to explore our story
+        Our story — scroll to explore
       </p>
 
-      {/* ── Horizontal track ─────────────────────────────────
-           This is the element GSAP translates on x.
-           It must be wide enough to create scroll distance.
-      ─────────────────────────────────────────────────── */}
+      {/* ── Horizontal track ── */}
       <div
         ref={trackRef}
         style={{
-          display:        "flex",
-          alignItems:     "center",
-          height:         "100%",
-          padding:        "0 8vw",
-          gap:            "clamp(24px, 4vw, 72px)",
-          whiteSpace:     "nowrap",
-          willChange:     "transform",
+          display:     "flex",
+          alignItems:  "center",
+          height:      "100%",
+          paddingLeft: "max(6vw, 40px)",
+          paddingRight: "max(12vw, 80px)",
+          gap:         "0",        // gaps are controlled inline via spacer divs
+          whiteSpace:  "nowrap",
+          willChange:  "transform",
+          userSelect:  "none",
         }}
       >
-        {story.map((chunk, i) => {
-          if (chunk.kind === "text") {
+        {story.map((item, i) => {
+          // Spacer (gap)
+          if (item.k === "gap") {
+            return (
+              <div key={i} style={{ flexShrink: 0, width: `${item.size}px` }} aria-hidden />
+            );
+          }
+
+          // Text phrase
+          if (item.k === "phrase") {
+            const isBoldWeight  = item.weight === "bold";
+            const isLightWeight = item.weight === "light";
+            const isAccent      = item.weight === "accent";
+
             return (
               <span
                 key={i}
                 style={{
-                  fontSize:      "clamp(2rem, 5vw, 5rem)",
-                  fontWeight:    600,
-                  letterSpacing: "-0.02em",
-                  lineHeight:    1,
-                  color:         "rgba(255,255,255,0.75)",
-                  // Subtle glow on key words
-                  textShadow:    "0 0 60px rgba(78,163,224,0.12)",
-                  fontFamily:    "inherit",
-                  userSelect:    "none",
-                  flexShrink:    0,
+                  display:     "inline-block",
+                  flexShrink:  0,
+                  fontSize:    "clamp(2.25rem, 5.5vw, 5.25rem)",
+                  fontWeight:  isBoldWeight ? 650 : isAccent ? 700 : 300,
+                  letterSpacing: "-0.025em",
+                  lineHeight:  1,
+                  // Accent gets gradient via inline style (bg-clip doesn't work inline)
+                  ...(isAccent
+                    ? {
+                        background: "linear-gradient(90deg, #4EA3E0, #a855f7)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                      }
+                    : {
+                        color: isBoldWeight
+                          ? "rgba(255,255,255,0.88)"
+                          : "rgba(255,255,255,0.32)",
+                      }),
+                  fontFamily: "inherit",
+                  textShadow: isBoldWeight
+                    ? "0 0 80px rgba(78,163,224,0.08)"
+                    : "none",
                 }}
               >
-                {chunk.value}
+                {item.text}
               </span>
             );
           }
 
-          // Glyph — inline SVG acting as punctuation
-          return (
-            <span
-              key={i}
-              aria-hidden
-              style={{
-                display:    "inline-flex",
-                alignItems: "center",
-                flexShrink: 0,
-                opacity:    0.8,
-              }}
-            >
-              {chunk.el}
-            </span>
-          );
+          // Glyph (inline SVG)
+          if (item.k === "glyph") {
+            const refIdx = glyphIndex++;
+            return (
+              <span
+                key={i}
+                ref={(el) => { glyphRefs.current[refIdx] = el; }}
+                data-parallax={(item as Glyph).parallaxFactor ?? 0.5}
+                style={{
+                  display:     "inline-flex",
+                  alignItems:  "center",
+                  flexShrink:  0,
+                  willChange:  "transform",
+                }}
+                aria-hidden
+              >
+                {(item as Glyph).el}
+              </span>
+            );
+          }
+
+          return null;
         })}
       </div>
+
+      {/* ── Bottom scroll hint ── */}
+      <p
+        aria-hidden
+        style={{
+          position: "absolute", bottom: "24px", left: "50%",
+          transform: "translateX(-50%)", zIndex: 20,
+          display: "flex", alignItems: "center", gap: "8px",
+          fontSize: "9px", fontWeight: 600,
+          letterSpacing: "0.3em", textTransform: "uppercase",
+          color: "rgba(255,255,255,0.12)", whiteSpace: "nowrap",
+        }}
+      >
+        {/* Minimal chevron right */}
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 2 L10 6 L2 10" stroke="currentColor" strokeWidth="1.2"
+            strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        Keep scrolling
+      </p>
     </section>
   );
 }
