@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sora, Inter, JetBrains_Mono } from "next/font/google"; // Vercel rebuild v3
+import { Sora, Inter, JetBrains_Mono } from "next/font/google"; // Vercel rebuild v4 - force deploy
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import AIChatbot from "@/components/AIChatbot";
