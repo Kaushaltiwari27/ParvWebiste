@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import TechMarquee from "@/components/TechMarquee";
+import CinematicStoryScroll from "@/components/CinematicStoryScroll";
 import StatsStrip from "@/components/StatsStrip";
 import About from "@/components/About";
 import Services from "@/components/Services";
@@ -20,7 +20,7 @@ export default function Home() {
     <main className="min-h-screen relative bg-black selection:bg-accent-electric selection:text-white font-general">
       <Navbar />
       <Hero />
-      <TechMarquee />
+      <CinematicStoryScroll />
       <StatsStrip />
       <About />
       <Services />
