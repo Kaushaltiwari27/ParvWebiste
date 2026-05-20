@@ -132,7 +132,7 @@ export default function Portfolio() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-accent-electric text-sm font-medium mb-6">
               Built for Real Businesses
             </div>
-            <h2 className="text-4xl md:text-5xl font-medium text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-medium text-white mb-6 scroll-reveal-text">
               Proof of Concept
             </h2>
             <p className="text-lg text-white/50">

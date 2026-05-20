@@ -61,12 +61,53 @@ export default function SmoothScroll() {
       });
     }
 
+    // Scroll reveal text masking
+    const revealTexts = document.querySelectorAll(".scroll-reveal-text");
+    const revealTriggers: ScrollTrigger[] = [];
+
+    revealTexts.forEach(el => {
+      const text = el.textContent || "";
+      const words = text.split(" ");
+      
+      el.innerHTML = "";
+      words.forEach((word) => {
+        const wrapper = document.createElement("span");
+        wrapper.className = "inline-block overflow-hidden mr-[0.22em] pb-[0.05em] align-bottom";
+        
+        const inner = document.createElement("span");
+        inner.className = "inline-block translate-y-[110%] will-change-transform";
+        inner.textContent = word;
+        
+        wrapper.appendChild(inner);
+        el.appendChild(wrapper);
+      });
+
+      const innerSpans = el.querySelectorAll("span > span");
+      
+      const trigger = ScrollTrigger.create({
+        trigger: el,
+        start: "top 88%",
+        toggleActions: "play none none none",
+        onEnter: () => {
+          gsap.to(innerSpans, {
+            y: "0%",
+            duration: 0.8,
+            stagger: 0.02,
+            ease: "power3.out",
+            overwrite: "auto"
+          });
+        }
+      });
+      revealTriggers.push(trigger);
+    });
+
     return () => {
       lenis.destroy();
       gsap.ticker.remove(updateTicker);
       if (skewTrigger) {
         skewTrigger.kill();
       }
+      revealTriggers.forEach(t => t.kill());
     };
   }, []);
 

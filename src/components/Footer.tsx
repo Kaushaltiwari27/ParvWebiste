@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import MagneticButton from "./MagneticButton";
 
 export default function Footer() {
   return (
@@ -25,10 +26,12 @@ export default function Footer() {
             <h4 className="text-white font-medium mb-6">Company</h4>
             <ul className="space-y-4">
               {["About", "Services", "Portfolio", "Pricing"].map((link) => (
-                <li key={link}>
-                  <Link href={`/#${link.toLowerCase()}`} className="text-white/50 hover:text-white transition-colors text-sm">
-                    {link}
-                  </Link>
+                <li key={link} className="h-6 flex items-center">
+                  <MagneticButton>
+                    <Link href={`/#${link.toLowerCase()}`} className="text-white/50 hover:text-white transition-colors text-sm py-1 block">
+                      {link}
+                    </Link>
+                  </MagneticButton>
                 </li>
               ))}
             </ul>
@@ -38,15 +41,19 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-medium mb-6">Contact</h4>
             <ul className="space-y-4">
-              <li>
-                <a href="tel:9081553331" className="text-white/50 hover:text-white transition-colors text-sm">
-                  Phone: +91 90815 53331
-                </a>
+              <li className="h-6 flex items-center">
+                <MagneticButton>
+                  <a href="tel:9081553331" className="text-white/50 hover:text-white transition-colors text-sm py-1 block">
+                    Phone: +91 90815 53331
+                  </a>
+                </MagneticButton>
               </li>
-              <li>
-                <a href="mailto:parvinfosoftadmin@gmail.com" className="text-white/50 hover:text-white transition-colors text-sm">
-                  Email: parvinfosoftadmin@gmail.com
-                </a>
+              <li className="h-6 flex items-center">
+                <MagneticButton>
+                  <a href="mailto:parvinfosoftadmin@gmail.com" className="text-white/50 hover:text-white transition-colors text-sm py-1 block">
+                    Email: parvinfosoftadmin@gmail.com
+                  </a>
+                </MagneticButton>
               </li>
               <li className="pt-2 border-t border-white/5">
                 <p className="text-white/50 text-sm leading-relaxed">
@@ -68,11 +75,13 @@ export default function Footer() {
                 { name: "LinkedIn", url: "https://www.linkedin.com/company/parvinfosoft/" },
                 { name: "WhatsApp", url: "https://wa.me/919081553331" }
               ].map((social) => (
-                <li key={social.name}>
-                  <a href={social.url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1 text-white/50 hover:text-white transition-colors text-sm">
-                    {social.name}
-                    <ArrowUpRight size={14} className="opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all" />
-                  </a>
+                <li key={social.name} className="h-6 flex items-center">
+                  <MagneticButton>
+                    <a href={social.url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1 text-white/50 hover:text-white transition-colors text-sm py-1">
+                      {social.name}
+                      <ArrowUpRight size={14} className="opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all" />
+                    </a>
+                  </MagneticButton>
                 </li>
               ))}
             </ul>

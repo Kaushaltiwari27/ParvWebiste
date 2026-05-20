@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import TextDecode from "./TextDecode";
 
 export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
@@ -64,16 +65,16 @@ export default function Preloader() {
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-4 rounded-full border-t border-l border-accent-electric/50"
               ></motion.div>
-
+ 
               {/* Core glow */}
               <div className="absolute inset-12 bg-accent-electric/20 blur-xl rounded-full animate-pulse"></div>
-
+ 
               {/* Progress Counter */}
               <div className="relative z-10 text-5xl md:text-7xl font-bold text-white tracking-tighter" style={{ fontVariantNumeric: "tabular-nums" }}>
                 {progress}<span className="text-2xl text-accent-electric">%</span>
               </div>
             </div>
-
+ 
             {/* Typography */}
             <div className="mt-12 text-center h-20">
               <motion.h1 
@@ -82,7 +83,7 @@ export default function Preloader() {
                 transition={{ duration: 0.5 }}
                 className="text-white text-3xl font-medium tracking-widest mb-3 uppercase"
               >
-                ParvInfoSoft
+                <TextDecode text="ParvInfoSoft" />
               </motion.h1>
               
               <motion.div 
