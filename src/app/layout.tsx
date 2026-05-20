@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import AIChatbot from "@/components/AIChatbot";
 import Preloader from "@/components/Preloader";
 import InteractiveBackground from "@/components/InteractiveBackground";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const sora = Sora({ 
   subsets: ["latin"], 
@@ -202,6 +203,8 @@ export default function RootLayout({
         <InteractiveBackground />
         <Preloader />
         <CustomCursor />
+        <SmoothScroll />
+        <div className="fixed inset-0 z-[9999] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.015] mix-blend-overlay pointer-events-none" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

@@ -63,7 +63,7 @@ export default function Services() {
                   e.currentTarget.style.setProperty("--gx", `${x}px`);
                   e.currentTarget.style.setProperty("--gy", `${y}px`);
                 }}
-                className="group cursor-pointer"
+                className="group cursor-pointer scroll-skew"
               >
                 <TiltCard className="p-10 relative overflow-hidden">
                   {/* Mouse-tracking spotlight Glow Effect */}

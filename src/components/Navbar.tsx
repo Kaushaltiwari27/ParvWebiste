@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AISearchModal from "./AISearchModal";
+import MagneticButton from "./MagneticButton";
 
 const navItems = [
   {
@@ -145,22 +146,26 @@ export default function Navbar() {
 
         {/* Right Side: Actions (Search + Get Started) */}
         <div className="hidden md:flex items-center gap-6">
-          <button 
-            onClick={() => setSearchOpen(true)}
-            className="w-10 h-10 rounded-full flex items-center justify-center text-white/50 hover:text-accent-electric hover:bg-white/5 border border-transparent hover:border-white/10 transition-all group"
-          >
-            <Search size={18} className="group-hover:scale-110 transition-transform" />
-          </button>
+          <MagneticButton>
+            <button 
+              onClick={() => setSearchOpen(true)}
+              className="w-10 h-10 rounded-full flex items-center justify-center text-white/50 hover:text-accent-electric hover:bg-white/5 border border-transparent hover:border-white/10 transition-all group"
+            >
+              <Search size={18} className="group-hover:scale-110 transition-transform" />
+            </button>
+          </MagneticButton>
 
-          <Link 
-            href="/get-started"
-            className="relative inline-flex items-center justify-center p-[0.6px] rounded-full overflow-hidden group bg-white/20 transition-all hover:bg-white/40 hover:scale-[1.02] active:scale-95"
-          >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] bg-white opacity-60 blur-[3px] group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative bg-black rounded-full px-[29px] py-[11px] h-full w-full flex items-center justify-center transition-colors group-hover:bg-[#0A0A0A]">
-              <span className="text-white text-[14px] font-medium">Get Started</span>
-            </div>
-          </Link>
+          <MagneticButton>
+            <Link 
+              href="/get-started"
+              className="relative inline-flex items-center justify-center p-[0.6px] rounded-full overflow-hidden group bg-white/20 transition-all hover:bg-white/40 hover:scale-[1.02] active:scale-95"
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] bg-white opacity-60 blur-[3px] group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative bg-black rounded-full px-[29px] py-[11px] h-full w-full flex items-center justify-center transition-colors group-hover:bg-[#0A0A0A]">
+                <span className="text-white text-[14px] font-medium">Get Started</span>
+              </div>
+            </Link>
+          </MagneticButton>
         </div>
 
         {/* Mobile Menu Button */}

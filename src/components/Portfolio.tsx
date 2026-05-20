@@ -198,7 +198,7 @@ export default function Portfolio() {
                   transition: "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s ease",
                   willChange: "transform",
                 }}
-                className="group relative bg-[#060606] border border-white/10 rounded-3xl overflow-hidden h-[400px] cursor-pointer"
+                className="group relative bg-[#060606] border border-white/10 rounded-3xl overflow-hidden h-[400px] cursor-pointer scroll-skew"
               >
                 {/* Background Image/Gradient with Parallax translation */}
                 <div 
