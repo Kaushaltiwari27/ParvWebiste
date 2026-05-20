@@ -135,6 +135,7 @@ export default function MeetFounder() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: false }}
               transition={{ duration: 0.8, ease: "easeOut" }}
+              data-cursor="FOUNDER"
               className="relative w-full aspect-[3/4] max-w-[500px] mx-auto rounded-2xl overflow-hidden border border-white/10"
             >
               <Image

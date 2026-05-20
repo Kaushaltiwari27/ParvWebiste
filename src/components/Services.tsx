@@ -55,11 +55,26 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
+                data-cursor="DISCOVER"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  e.currentTarget.style.setProperty("--gx", `${x}px`);
+                  e.currentTarget.style.setProperty("--gy", `${y}px`);
+                }}
                 className="group cursor-pointer"
               >
-                <TiltCard className="p-10">
-                  {/* Glow Effect */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[150px] bg-accent-electric/20 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <TiltCard className="p-10 relative overflow-hidden">
+                  {/* Mouse-tracking spotlight Glow Effect */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: "radial-gradient(circle 120px at var(--gx, 50%) var(--gy, 50%), rgba(78, 163, 224, 0.18), transparent 80%)",
+                      mixBlendMode: "screen",
+                      willChange: "background"
+                    }}
+                  ></div>
                   
                   {/* Top border highlight */}
                   <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-electric to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

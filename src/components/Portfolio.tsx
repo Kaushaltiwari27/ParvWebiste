@@ -176,18 +176,50 @@ export default function Portfolio() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
                 key={project.id}
-                className="group relative bg-transparent border border-white/10 rounded-3xl overflow-hidden h-[400px]"
+                data-cursor="VIEW"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = (e.clientX - rect.left) / rect.width - 0.5;
+                  const y = (e.clientY - rect.top) / rect.height - 0.5;
+                  e.currentTarget.style.setProperty("--mx", `${x * -35}px`);
+                  e.currentTarget.style.setProperty("--my", `${y * -35}px`);
+                  e.currentTarget.style.setProperty("--rx", `${y * 10}deg`);
+                  e.currentTarget.style.setProperty("--ry", `${x * -10}deg`);
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.setProperty("--mx", "0px");
+                  e.currentTarget.style.setProperty("--my", "0px");
+                  e.currentTarget.style.setProperty("--rx", "0deg");
+                  e.currentTarget.style.setProperty("--ry", "0deg");
+                }}
+                style={{
+                  transform: "perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))",
+                  transformStyle: "preserve-3d",
+                  transition: "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s ease",
+                  willChange: "transform",
+                }}
+                className="group relative bg-[#060606] border border-white/10 rounded-3xl overflow-hidden h-[400px] cursor-pointer"
               >
-                {/* Background Image/Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.imageGrad} transition-transform duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-80`}></div>
+                {/* Background Image/Gradient with Parallax translation */}
+                <div 
+                  className={`absolute inset-0 bg-gradient-to-br ${project.imageGrad} opacity-40 group-hover:opacity-80`}
+                  style={{
+                    transform: "translate(var(--mx, 0px), var(--my, 0px)) scale(1.15)",
+                    transition: "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease",
+                    willChange: "transform",
+                  }}
+                ></div>
                 
                 {/* Overlay gradient to ensure text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/20 group-hover:from-black group-hover:via-black/90 group-hover:to-black/40 transition-colors duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-black/20 group-hover:from-black group-hover:via-black/90 group-hover:to-black/40 transition-colors duration-500"></div>
 
-                <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
+                <div 
+                  className="absolute inset-0 p-8 flex flex-col justify-end z-10"
+                  style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}
+                >
                   
                   {/* Top Category Badge */}
-                  <div className="absolute top-6 left-6 px-3 py-1.5 rounded-full bg-transparent/50 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 flex items-center gap-2">
+                  <div className="absolute top-6 left-6 px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 flex items-center gap-2">
                     <project.icon size={12} className="text-accent-electric" />
                     {project.category}
                   </div>
