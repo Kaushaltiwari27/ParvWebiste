@@ -2,7 +2,6 @@
 
 ParvInfoSoft is a modern Next.js 14 web application designed as a luxury cinematic agency portfolio and IT consultancy. Combining elite-level motion design with robust, scalable software architecture, this project delivers an immersive Awwwards-grade experience featuring high-performance animations, fluid typography, and intelligent interactive systems.
 
-Inspired by top-tier creative studio portfolios like [POV Studios](https://povstudios.in/), this codebase features hardware-accelerated animations, custom WebGL frames, magnetic navigation structures, and inertia-driven physics scrolling.
 
 ---
 
