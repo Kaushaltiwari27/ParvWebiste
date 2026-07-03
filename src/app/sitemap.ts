@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { servicesData, trainingData, solutionsData, resourcesData } from '@/data/pages';
+import { caseStudiesData } from '@/data/case-studies';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.parvinfosoft.com';
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...Object.keys(trainingData).reduce((acc, key) => ({ ...acc, [key]: 'training' }), {}),
     ...Object.keys(solutionsData).reduce((acc, key) => ({ ...acc, [key]: 'solutions' }), {}),
     ...Object.keys(resourcesData).reduce((acc, key) => ({ ...acc, [key]: 'resources' }), {}),
+    ...Object.keys(caseStudiesData).reduce((acc, key) => ({ ...acc, [key]: 'resources/case-studies' }), {}),
   };
 
   const dynamicRoutes = Object.keys(allPages).map((slug) => ({
