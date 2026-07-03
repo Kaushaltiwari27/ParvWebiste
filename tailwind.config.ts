@@ -21,7 +21,7 @@ const config: Config = {
         sora: ['var(--font-sora)', 'sans-serif'],
         inter: ['var(--font-inter)', 'sans-serif'],
         mono: ['var(--font-jetbrains-mono)', 'monospace'],
-        general: ['"General Sans"', 'sans-serif'],
+        general: ['var(--font-plus-jakarta-sans)', 'sans-serif'],
       },
       boxShadow: {
         'glow': '0 0 10px rgba(78, 163, 224, 0.1)',

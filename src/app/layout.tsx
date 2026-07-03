@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Sora, Inter, JetBrains_Mono } from "next/font/google"; // Vercel rebuild v4 - force deploy
+import { Sora, Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google"; // Vercel rebuild v4 - force deploy
 import "./globals.css";
-import CustomCursor from "@/components/CustomCursor";
-import AIChatbot from "@/components/AIChatbot";
-import Preloader from "@/components/Preloader";
-import InteractiveBackground from "@/components/InteractiveBackground";
-import SmoothScroll from "@/components/SmoothScroll";
+import dynamic from "next/dynamic";
+
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
+const AIChatbot = dynamic(() => import("@/components/AIChatbot"), { ssr: false });
+const Preloader = dynamic(() => import("@/components/Preloader"), { ssr: false });
+const InteractiveBackground = dynamic(() => import("@/components/InteractiveBackground"), { ssr: false });
+const SmoothScroll = dynamic(() => import("@/components/SmoothScroll"), { ssr: false });
 
 const sora = Sora({ 
   subsets: ["latin"], 
@@ -25,7 +27,14 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: '--font-plus-jakarta-sans',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.parvinfosoft.com"),
   title: "ParvInfoSoft | AI Training Institute & IT Services Company in Surat, India",
   description: "ParvInfoSoft is a leading AI Institute in Surat, Gujarat, delivering hands-on AI training, AI tools mastery, and automation skills that help students and professionals build real income opportunities. We also provide expert web development, app development, and digital marketing services, enabling businesses to scale with AI automation, CRM solutions, and custom software. Serving clients across India and worldwide.",
   keywords: [
@@ -219,10 +228,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet" />
-      </head>
-      <body className={`font-general antialiased bg-transparent text-white selection:bg-accent-electric selection:text-white`}>
+      <body className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable} ${plusJakartaSans.variable} font-general antialiased bg-transparent text-white selection:bg-accent-electric selection:text-white`}>
         <InteractiveBackground />
         <Preloader />
         <CustomCursor />
