@@ -128,6 +128,8 @@ export default function RootLayout({
         "@id": "https://www.parvinfosoft.com/#organization",
         "name": "ParvInfoSoft",
         "url": "https://www.parvinfosoft.com/",
+        "image": "https://www.parvinfosoft.com/logo.png",
+        "priceRange": "$$",
         "description": "Premium AI Training Institute and IT Solutions company serving Surat, Gujarat, India and worldwide.",
         "telephone": "+91-9081553331",
         "email": "parvinfosoftadmin@gmail.com",
@@ -182,7 +184,12 @@ export default function RootLayout({
                   "itemOffered": {
                     "@type": "Course",
                     "name": "India's Most Practical AI Mastery Program",
-                    "description": "Learn AI tools, automation, content creation & income skills in 30 days."
+                    "description": "Learn AI tools, automation, content creation & income skills in 30 days.",
+                    "provider": {
+                      "@type": "Organization",
+                      "name": "ParvInfoSoft",
+                      "url": "https://www.parvinfosoft.com/"
+                    }
                   }
                 }
               ]
