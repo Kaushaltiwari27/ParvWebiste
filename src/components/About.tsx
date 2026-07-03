@@ -42,15 +42,16 @@ export default function About() {
           </div>
 
           {/* Right Column: Floating Cards & Interactive 3D Model */}
-          <div className="lg:w-1/2 relative w-full h-[500px]">
-            <div className="relative w-full h-full flex items-center justify-center">
-              {/* Spline 3D Interactive Model */}
+          <div className="lg:w-1/2 relative w-full h-auto lg:h-[500px] flex flex-col items-center justify-center">
+            
+            {/* Spline Model Container */}
+            <div className="relative w-full h-[350px] md:h-[400px] lg:h-full lg:absolute lg:inset-0 z-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: false }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
-                className="absolute inset-0 z-0"
+                className="w-full h-full"
               >
                 <div className="w-full h-full rounded-3xl overflow-hidden border border-white/5 opacity-80 mix-blend-screen mask-radial-fade">
                   <iframe 
@@ -62,7 +63,12 @@ export default function About() {
                   ></iframe>
                 </div>
               </motion.div>
+              {/* Decorative background glow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-accent-electric/10 rounded-full blur-[100px] pointer-events-none"></div>
+            </div>
 
+            {/* Responsive floating cards */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:block gap-4 w-full mt-8 lg:mt-0 relative z-10 lg:w-full lg:h-full">
               {cards.map((card, i) => (
                 <motion.div
                   key={i}
@@ -76,20 +82,18 @@ export default function About() {
                     stiffness: 50 
                   }}
                   whileHover={{ scale: 1.05, zIndex: 10 }}
+                  className="static lg:absolute bg-[#050505]/80 backdrop-blur-md border border-white/10 px-4 py-4 rounded-xl shadow-2xl flex items-center justify-center text-center select-none w-full lg:w-[200px] xl:w-[220px]"
                   style={{
                     top: `${(i % 3) * 30}%`,
-                    left: `${Math.floor(i / 3) * 45}%`,
+                    left: `${Math.floor(i / 3) * 48}%`,
                     marginTop: i > 2 ? '40px' : '0'
                   }}
-                  className="absolute z-10 bg-[#050505]/80 backdrop-blur-md border border-white/10 px-6 py-4 rounded-xl shadow-2xl flex items-center justify-center min-w-[200px]"
                 >
-                  <span className="text-white font-medium tracking-wide">{card}</span>
+                  <span className="text-white font-medium tracking-wide text-sm md:text-base">{card}</span>
                 </motion.div>
               ))}
-              
-              {/* Decorative background glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-accent-electric/10 rounded-full blur-[100px] pointer-events-none"></div>
             </div>
+
           </div>
 
         </div>

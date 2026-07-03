@@ -30,9 +30,18 @@ export default function SuccessStories() {
   const x = useMotionValue(0);
 
   useEffect(() => {
-    if (carouselRef.current) {
-      setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);
-    }
+    const handleResize = () => {
+      if (carouselRef.current) {
+        setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);
+      }
+    };
+    
+    // Initial calculation
+    handleResize();
+
+    // Attach resize listener to handle screen rotations or window sizing
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Auto-slide effect using Framer Motion's imperative animation
@@ -111,7 +120,7 @@ export default function SuccessStories() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: "100px" }}
                 transition={{ delay: (index % 5) * 0.1 }}
-                className="w-[350px] md:w-[420px] shrink-0 bg-[#050505] border border-white/10 rounded-3xl p-8 relative group hover:border-white/30 transition-colors"
+                className="w-[350px] max-w-[calc(100vw-32px)] md:w-[420px] shrink-0 bg-[#050505] border border-white/10 rounded-3xl p-8 relative group hover:border-white/30 transition-colors"
               >
                 <Quote size={40} className="text-white/5 absolute top-6 right-6 group-hover:text-accent-electric/10 transition-colors" />
                 

@@ -226,7 +226,7 @@ export default function LiveAIDemos() {
                 {!recommendedCourse && !isAnalyzing && (
                   <div className="space-y-6">
                     <label className="text-sm text-white/70 block text-center">I am currently a...</label>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                       {["student", "working professional", "freelancer", "business owner"].map((type) => (
                         <button 
                           key={type}
@@ -294,18 +294,18 @@ export default function LiveAIDemos() {
                   <p className="text-white/50">Enter your business niche and instantly generate a high-converting hero section for your website.</p>
                 </div>
 
-                <div className="flex gap-4 mb-10">
+                <div className="flex flex-col sm:flex-row gap-4 mb-10">
                   <input 
                     type="text" 
                     value={niche}
                     onChange={(e) => setNiche(e.target.value)}
                     placeholder="e.g. Real Estate Agency, Dental Clinic..."
-                    className="flex-1 bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-accent-electric transition-colors"
+                    className="flex-1 bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-accent-electric transition-colors w-full"
                   />
                   <button 
                     onClick={handleGenerateHeadline}
                     disabled={!niche || isGenerating}
-                    className="px-8 py-4 rounded-xl bg-accent-electric text-black font-medium hover:bg-white transition-colors disabled:opacity-50 flex items-center gap-2"
+                    className="px-8 py-4 rounded-xl bg-accent-electric text-black font-medium hover:bg-white transition-colors disabled:opacity-50 flex items-center justify-center gap-2 w-full sm:w-auto shrink-0"
                   >
                     {isGenerating ? <Loader2 className="animate-spin" size={20} /> : <Sparkles size={20} />}
                     Generate

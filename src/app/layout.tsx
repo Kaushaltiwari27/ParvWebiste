@@ -115,52 +115,75 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "EducationalOrganization",
-        "@id": "https://www.parvinfosoft.com/#educational",
-        "name": "ParvInfoSoft Training Institute",
-        "url": "https://www.parvinfosoft.com/training",
-        "logo": "https://www.parvinfosoft.com/logo.png",
+        "@type": ["EducationalOrganization", "LocalBusiness"],
+        "@id": "https://www.parvinfosoft.com/#organization",
+        "name": "ParvInfoSoft",
+        "url": "https://www.parvinfosoft.com/",
+        "description": "Premium AI Training Institute and IT Solutions company serving Surat, Gujarat, India and worldwide.",
+        "telephone": "+91-9081553331",
+        "email": "parvinfosoftadmin@gmail.com",
         "founder": {
           "@type": "Person",
-          "name": "Kaushal Tiwari"
+          "name": "Kaushal Tiwari",
+          "jobTitle": "Founder and CEO",
+          "url": "https://www.parvinfosoft.com/"
         },
-        "description": "Premium AI training and automation consulting firm based in Surat, India. India's most practical AI mastery program.",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "4019 The Palladium Mall, near Vijaynagar, Chikuwadi, Nana Varachha",
+          "streetAddress": "4019 The Palladium Mall, Near Vijaynagar, Chikuwadi, Nana Varachha",
           "addressLocality": "Surat",
           "addressRegion": "Gujarat",
           "postalCode": "395010",
           "addressCountry": "IN"
         },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+91-9081553331",
-          "contactType": "customer service"
+        "areaServed": {
+          "@type": "Country",
+          "name": "India"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "ParvInfoSoft Services & Training",
+          "itemListElement": [
+            {
+              "@type": "OfferCatalog",
+              "name": "IT Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI Automation Solutions"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Website & Mobile App Development"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "AI Training Programs",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Course",
+                    "name": "India's Most Practical AI Mastery Program",
+                    "description": "Learn AI tools, automation, content creation & income skills in 30 days."
+                  }
+                }
+              ]
+            }
+          ]
         },
         "sameAs": [
           "https://www.instagram.com/parvinfosoftai?igsh=MWVkdzFqb25hMXh2ZQ==",
           "https://www.linkedin.com/company/parvinfosoft/"
         ]
-      },
-      {
-        "@type": "ProfessionalService",
-        "@id": "https://www.parvinfosoft.com/#business",
-        "name": "ParvInfoSoft IT & AI Automation Services",
-        "url": "https://www.parvinfosoft.com",
-        "image": "https://www.parvinfosoft.com/logo.png",
-        "priceRange": "$$$",
-        "telephone": "+91-9081553331",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "4019 The Palladium Mall, near Vijaynagar, Chikuwadi, Nana Varachha",
-          "addressLocality": "Surat",
-          "addressRegion": "Gujarat",
-          "postalCode": "395010",
-          "addressCountry": "IN"
-        },
-        "areaServed": ["Surat", "Gujarat", "India"],
-        "description": "Top-rated IT company in Surat specializing in AI automation, website development, App development, CRM/ERP systems, and lead generation."
       },
       {
         "@type": "FAQPage",

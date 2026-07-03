@@ -18,8 +18,12 @@ export default function CustomCursor() {
   const ringY = useRef<((val: number) => void) | null>(null);
 
   useEffect(() => {
-    // Check if device is mobile or touch-enabled
-    if (window.matchMedia("(max-width: 768px)").matches || "ontouchstart" in window) {
+    // Check if device is mobile, tablet, or touch-enabled
+    if (
+      window.matchMedia("(max-width: 1023px)").matches || 
+      "ontouchstart" in window || 
+      (typeof navigator !== "undefined" && navigator.maxTouchPoints > 0)
+    ) {
       setIsMobile(true);
       return;
     }

@@ -66,9 +66,7 @@ const stats = [
 
 export default function MeetFounder() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardRefs   = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
+  const cardRefs   = useRef<(HTMLDivElement | null)[]>([]);  useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const section = sectionRef.current;
@@ -76,46 +74,78 @@ export default function MeetFounder() {
 
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
-    // ── Set each card to its "exploded" start position ────────
-    cards.forEach((card, i) => {
-      gsap.set(card, {
-        x:        stats[i].explodeX,
-        y:        stats[i].explodeY,
-        opacity:  0,
-        scale:    0.5,
-        rotation: (i % 2 === 0 ? -1 : 1) * 15,
+    const mm = gsap.matchMedia();
+
+    // Desktop
+    mm.add("(min-width: 1024px)", () => {
+      // ── Set each card to its "exploded" start position ────────
+      cards.forEach((card, i) => {
+        gsap.set(card, {
+          x:        stats[i].explodeX,
+          y:        stats[i].explodeY,
+          opacity:  0,
+          scale:    0.5,
+          rotation: (i % 2 === 0 ? -1 : 1) * 15,
+        });
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start:   "top 70%",
+          end:     "top 10%",
+          scrub:   1.4,
+        },
+      });
+
+      tl.to(cards, {
+        x:        0,
+        y:        0,
+        opacity:  1,
+        scale:    1,
+        rotation: 0,
+        duration: 1,
+        stagger:  0.08,
+        ease:     "power3.out",
       });
     });
 
-    // ── Phase 1: cards fly IN to assembled positions ──────────
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start:   "top 70%",
-        end:     "top 10%",
-        scrub:   1.4,
-        // markers: true, // uncomment to debug
-      },
-    });
+    // Mobile / Tablet
+    mm.add("(max-width: 1023px)", () => {
+      // On mobile/tablet, cards just fade in vertically on scroll without offset
+      cards.forEach((card) => {
+        gsap.set(card, {
+          x:        0,
+          y:        30,
+          opacity:  0,
+          scale:    0.95,
+          rotation: 0,
+        });
+      });
 
-    tl.to(cards, {
-      x:        0,
-      y:        0,
-      opacity:  1,
-      scale:    1,
-      rotation: 0,
-      duration: 1,
-      stagger:  0.08,
-      ease:     "power3.out",
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start:   "top 85%",
+          end:     "top 40%",
+          scrub:   true,
+        },
+      });
+
+      tl.to(cards, {
+        y:        0,
+        opacity:  1,
+        scale:    1,
+        duration: 1,
+        stagger:  0.1,
+        ease:     "power2.out",
+      });
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === section) t.kill();
-      });
+      mm.revert();
     };
   }, []);
-
   return (
     <section
       ref={sectionRef}

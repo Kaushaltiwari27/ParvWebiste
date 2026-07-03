@@ -202,50 +202,70 @@ export default function CinematicStoryScroll() {
     const track   = trackRef.current;
     if (!section || !track) return;
 
-    // ── Responsive: disable pin on mobile (too small to make sense)
-    const isMobile = window.innerWidth < 768;
+    const mm = gsap.matchMedia();
 
-    // ── 1. Main horizontal scrub tween ──────────────────────
-    const getDistance = () =>
-      Math.max(0, track.scrollWidth - window.innerWidth + 160); // +160px breathing room
+    // Desktop & Tablet (Horizontal Pinning)
+    mm.add("(min-width: 768px)", () => {
+      const getDistance = () =>
+        Math.max(0, track.scrollWidth - window.innerWidth + 160); // +160px breathing room
 
-    const mainTween = gsap.to(track, {
-      x:    () => -getDistance(),
-      ease: "none",
-    });
-
-    const trigger = ScrollTrigger.create({
-      trigger:            section,
-      start:              "top top",
-      end:                () => `+=${isMobile ? getDistance() * 0.6 : getDistance()}`,
-      pin:                !isMobile,
-      anticipatePin:      1,
-      scrub:              isMobile ? 0.8 : 1.6, // more lag on desktop = more cinematic
-      animation:          mainTween,
-      invalidateOnRefresh: true,
-    });
-
-    // ── 2. Layered parallax on glyphs ────────────────────────
-    // Each glyph has a parallaxFactor — they move slightly slower
-    // than the main track, creating depth illusion.
-    glyphRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const factor = el.dataset.parallax ? parseFloat(el.dataset.parallax) : 0.5;
-      gsap.to(el, {
-        x:    () => getDistance() * factor * 0.25, // counter-translate
+      const mainTween = gsap.to(track, {
+        x:    () => -getDistance(),
         ease: "none",
-        scrollTrigger: {
-          trigger:            section,
-          start:              "top top",
-          end:                () => `+=${getDistance()}`,
-          scrub:              1.6,
-          invalidateOnRefresh: true,
-        },
+      });
+
+      const trigger = ScrollTrigger.create({
+        trigger:            section,
+        start:              "top top",
+        end:                () => `+=${getDistance()}`,
+        pin:                true,
+        anticipatePin:      1,
+        scrub:              1.6, // cinematic scrub
+        animation:          mainTween,
+        invalidateOnRefresh: true,
+      });
+
+      // Layered parallax on glyphs
+      glyphRefs.current.forEach((el) => {
+        if (!el) return;
+        const factor = el.dataset.parallax ? parseFloat(el.dataset.parallax) : 0.5;
+        gsap.to(el, {
+          x:    () => getDistance() * factor * 0.25, // counter-translate
+          ease: "none",
+          scrollTrigger: {
+            trigger:            section,
+            start:              "top top",
+            end:                () => `+=${getDistance()}`,
+            scrub:              1.6,
+            invalidateOnRefresh: true,
+          },
+        });
       });
     });
 
-    // ── 3. Subtle floating micro-animations on glyphs ────────
-    // Independent of scroll — they breathe on their own clock.
+    // Mobile (Wrapped Text Scroll-Highlight Reveal)
+    mm.add("(max-width: 767px)", () => {
+      const elements = track.querySelectorAll(".story-item");
+      elements.forEach((el) => {
+        gsap.fromTo(el, 
+          { opacity: 0.2, y: 15 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              end: "top 60%",
+              scrub: true,
+            }
+          }
+        );
+      });
+    });
+
+    // Subtle floating micro-animations on glyphs (runs everywhere)
     glyphRefs.current.forEach((el, i) => {
       if (!el) return;
       const t = gsap.to(el, {
@@ -260,7 +280,7 @@ export default function CinematicStoryScroll() {
       floatTimers.current.push(t);
     });
 
-    // ── 4. Fade-in the section gracefully ────────────────────
+    // Fade-in the section gracefully
     gsap.from(section, {
       opacity: 0,
       duration: 1.2,
@@ -273,12 +293,8 @@ export default function CinematicStoryScroll() {
     });
 
     return () => {
-      trigger.kill();
-      mainTween.kill();
+      mm.revert();
       floatTimers.current.forEach((t) => t.kill());
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === section) st.kill();
-      });
     };
   }, []);
 
@@ -289,14 +305,7 @@ export default function CinematicStoryScroll() {
     <section
       ref={sectionRef}
       aria-label="Our story"
-      style={{
-        position:     "relative",
-        height:       "100vh",
-        overflow:     "hidden",
-        background:   "#030712",
-        borderTop:    "1px solid rgba(255,255,255,0.05)",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
-      }}
+      className="relative w-full h-auto py-24 md:py-0 md:h-screen flex items-center justify-center bg-[#030712] border-t border-b border-white/5 overflow-hidden"
     >
       {/* ── Ambient light bloom ── */}
       <div
@@ -321,6 +330,7 @@ export default function CinematicStoryScroll() {
           background:
             "linear-gradient(to right, #030712 0%, transparent 6%, transparent 94%, #030712 100%)",
         }}
+        className="hidden md:block"
       />
 
       {/* ── Eyebrow label ── */}
@@ -337,26 +347,25 @@ export default function CinematicStoryScroll() {
         Our story — scroll to explore
       </p>
 
-      {/* ── Horizontal track ── */}
+      {/* ── Story track ── */}
       <div
         ref={trackRef}
         style={{
-          display:     "flex",
-          alignItems:  "center",
-          height:      "100%",
-          paddingLeft: "max(6vw, 40px)",
-          paddingRight: "max(12vw, 80px)",
-          gap:         "0",        // gaps are controlled inline via spacer divs
-          whiteSpace:  "nowrap",
-          willChange:  "transform",
-          userSelect:  "none",
+          display: "flex",
+          userSelect: "none",
         }}
+        className="relative flex-wrap md:flex-nowrap items-center justify-center md:justify-start h-auto md:h-full max-w-7xl mx-auto px-6 md:pl-[max(6vw,40px)] md:pr-[max(12vw,80px)] gap-x-4 gap-y-6 md:gap-0 whitespace-normal md:whitespace-nowrap will-change-transform"
       >
         {story.map((item, i) => {
           // Spacer (gap)
           if (item.k === "gap") {
             return (
-              <div key={i} style={{ flexShrink: 0, width: `${item.size}px` }} aria-hidden />
+              <div 
+                key={i} 
+                className="hidden md:block shrink-0" 
+                style={{ width: `${item.size}px` }} 
+                aria-hidden 
+              />
             );
           }
 
@@ -372,10 +381,10 @@ export default function CinematicStoryScroll() {
                 style={{
                   display:     "inline-block",
                   flexShrink:  0,
-                  fontSize:    "clamp(2.25rem, 5.5vw, 5.25rem)",
+                  fontSize:    "clamp(2rem, 5.5vw, 5.25rem)",
                   fontWeight:  isBoldWeight ? 650 : isAccent ? 700 : 300,
                   letterSpacing: "-0.025em",
-                  lineHeight:  1,
+                  lineHeight:  1.1,
                   // Accent gets gradient via inline style (bg-clip doesn't work inline)
                   ...(isAccent
                     ? {
@@ -394,6 +403,7 @@ export default function CinematicStoryScroll() {
                     ? "0 0 80px rgba(78,163,224,0.08)"
                     : "none",
                 }}
+                className="story-item text-center md:text-left whitespace-nowrap"
               >
                 {item.text}
               </span>
@@ -414,6 +424,7 @@ export default function CinematicStoryScroll() {
                   flexShrink:  0,
                   willChange:  "transform",
                 }}
+                className="story-item"
                 aria-hidden
               >
                 {(item as Glyph).el}
@@ -436,6 +447,7 @@ export default function CinematicStoryScroll() {
           letterSpacing: "0.3em", textTransform: "uppercase",
           color: "rgba(255,255,255,0.12)", whiteSpace: "nowrap",
         }}
+        className="hidden md:flex"
       >
         {/* Minimal chevron right */}
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">

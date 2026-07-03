@@ -40,7 +40,7 @@ export default function CTABanner() {
           viewport={{ once: false }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-[48px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-tight"
+          <h2 className="text-[36px] sm:text-[48px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-tight"
               style={{
                 backgroundImage: "linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.7) 100%)",
                 WebkitBackgroundClip: "text",

@@ -55,7 +55,7 @@ export default function DynamicPageTemplate({ data, category }: { data: PageCont
               <span>Back</span>
             </Link>
             
-            <h1 className="text-[48px] md:text-[64px] lg:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-tight"
+            <h1 className="text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-tight"
                 style={{
                   backgroundImage: "linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.7) 100%)",
                   WebkitBackgroundClip: "text",

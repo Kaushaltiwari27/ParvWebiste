@@ -224,17 +224,17 @@ export default function Portfolio() {
                     {project.category}
                   </div>
 
-                  <h3 className="text-2xl font-medium text-white mb-2 translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                   <h3 className="text-2xl font-medium text-white mb-2 translate-y-0 md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-500">
                     {project.title}
                   </h3>
                   
-                  <p className="text-white/60 text-sm leading-relaxed mb-6 translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-75 line-clamp-2">
+                  <p className="text-white/60 text-sm leading-relaxed mb-6 translate-y-0 md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-500 delay-75 line-clamp-2">
                     {project.summary}
                   </p>
 
                   {/* Hidden metrics revealed on hover */}
                   <div className="overflow-hidden">
-                    <div className="opacity-0 group-hover:opacity-100 translate-y-8 group-hover:translate-y-0 transition-all duration-500 delay-150 flex items-center justify-between border-t border-white/10 pt-6 mt-2">
+                    <div className="opacity-100 translate-y-0 md:opacity-0 md:group-hover:opacity-100 md:translate-y-8 md:group-hover:translate-y-0 transition-all duration-500 delay-150 flex items-center justify-between border-t border-white/10 pt-6 mt-2">
                       <div>
                         <div className="text-accent-electric font-medium text-lg leading-none mb-1">{project.metric}</div>
                         <div className="text-white/40 text-xs uppercase tracking-wider">{project.metricLabel}</div>
